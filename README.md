@@ -1,2 +1,9 @@
-# 42-cub3d
-3D game using C
+# Cub3d
+
+## Authors
+```
+	Youssef El Aissaoui <yelaissa>
+```
+```
+	Hamza Talhaouia  <htalhaou>
+```
