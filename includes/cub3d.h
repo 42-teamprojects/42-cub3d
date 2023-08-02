@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 18:42:44 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/02 20:00:59 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,9 @@ t_game	*g_game;
 
 // Parser
 t_map	parser(char *file);
+char	**get_map(char *file);
+
+// Utils
+void	throw_err(char *err);
 
 #endif

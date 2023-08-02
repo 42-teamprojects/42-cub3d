@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 18:40:03 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:38:17 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,26 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
+# include <errno.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 # include "../mlx/include/MLX42/MLX42.h"
 
+typedef struct s_info {
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		f[3];
+	int		c[3];
+}				t_info;
+
 typedef struct s_map {
 	int		width;
 	int		height;
+	t_info	info;
 }				t_map;
 
 typedef struct s_game {
