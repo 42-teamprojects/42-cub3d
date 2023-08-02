@@ -14,7 +14,9 @@ GLFW = $(shell brew --prefix glfw)
 
 DEPS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)/lib" $(MLX42)
 
-SRCS = main.c
+SRCS = main.c \
+	sources/parser/parser.c \
+	sources/raycasting/raycasting.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -39,4 +41,4 @@ re: fclean all
 
 # to be deleted
 run: all
-	./cub3D maps/1.cub
+	@./cub3D maps/1.cub
