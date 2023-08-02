@@ -17,6 +17,7 @@ DEPS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)/lib
 SRCS = main.c \
 	sources/parser/parser.c \
 	sources/parser/get_map.c \
+	sources/parser/check_map.c \
 	sources/raycasting/raycasting.c \
 	sources/utils/utils.c \
 

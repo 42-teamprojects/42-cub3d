@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 15:29:30 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 20:11:15 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/08/02 18:58:06 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/08/02 21:04:44 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	init_game(char *file)
+t_map	*check_map(char **map)
 {
-	g_game = (t_game *) malloc(sizeof(t_game));
-	g_game->map = parser(file);
-	g_game->mlx = mlx_init(g_game->map->width, \
-		g_game->map->height, "Cub3D", true);
-	if (!g_game->mlx)
-		return (1);
-	return (0);
-}
+	int		i;
+	t_map	*_map;
 
-int	main(int ac, char **av)
-{
-	if (ac == 1 || ac > 2)
-		return (throw_err(ERR_ARG), 1);
-	if (init_game(av[1]))
-		return (1);
-	mlx_loop(g_game->mlx);
-	mlx_terminate(g_game->mlx);
-	return (0);
+	_map = (t_map *) malloc(sizeof(t_map));
+	return (_map);
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strnstr(map[i], "NO", 2) || ft_strnstr(map[i], "SO", 2) \
+			|| ft_strnstr(map[i], "WE", 2) || ft_strnstr(map[i], "EA", 2) \
+			|| ft_strnstr(map[i], "F", 1) || ft_strnstr(map[i], "C", 1))
+			return (0);
+	}
+	return (_map);
 }

@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 19:38:17 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/02 20:10:26 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ typedef struct s_info {
 typedef struct s_map {
 	int		width;
 	int		height;
-	t_info	info;
+	t_info	*info;
 }				t_map;
 
 typedef struct s_game {
 	mlx_t	*mlx;
-	t_map	map;
+	t_map	*map;
 }				t_game;
 
 #endif
