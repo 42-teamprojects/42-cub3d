@@ -2,13 +2,13 @@ NAME = cub3D
 
 LIBFT = libft/libft.a
 
-CFLAGS = -Wall -Wextra -Werror -I includes/ 
+CFLAGS = -Wall -Wextra -Werror -I includes/ -fsanitize=address
 
 CC = cc
 
 HEADERS = includes/global.h includes/cub3d.h
 
-MLX42 = MLX42/build/libmlx42.a
+MLX42 = mlx/build/libmlx42.a
 
 GLFW = $(shell brew --prefix glfw)
 

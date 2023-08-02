@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 17:24:55 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/02 18:40:03 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,35 @@
 # define GLOBAL_H
 
 # define BRED "\e[1;31m"
-# define RED "\033[0;31m"
-# define YELLOW "\033[1;33m"
 # define CX "\033[0m"
-# define BLACK "\e[0;30m"
-# define GREEN "\e[0;32m"
 # define BGREEN "\e[1;32m"
-# define BLUE "\e[0;34m"
-# define PURPLE "\e[0;35m"
 # define CYAN "\e[1;36m"
-# define WHITE "\e[0;37m"
+
+// Errors
+# define ERR_CUB "Invalid map file (.cub)"
+# define ERR_WALL "The map must be closed/surrounded by walls."
+# define ERR_ARG "Please enter 1 map file as argument."
+
+// Game
+# define TILE_SIZE 64
 
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "../mlx/include/MLX42/MLX42.h"
+
+typedef struct s_map {
+	int		width;
+	int		height;
+}				t_map;
+
+typedef struct s_game {
+	mlx_t	*mlx;
+	t_map	map;
+}				t_game;
 
 #endif
