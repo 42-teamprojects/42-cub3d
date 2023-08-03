@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 18:35:27 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/03 19:11:52 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	throw_err(char *err);
 
 int		draw_pixel(void);
 void	draw_sqr(int tmp_x, int tmp_y, int i, int j);
+void DDA(int X0, int Y0, int X1, int Y1);
 
 #endif
