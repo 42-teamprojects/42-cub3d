@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 20:10:26 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:51:08 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 // Game
 # define TILE_SIZE 64
-
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
@@ -51,9 +50,16 @@ typedef struct s_map {
 	t_info	*info;
 }				t_map;
 
+typedef struct s_player {
+	float	x;
+	float	y;
+}				t_player;
+
 typedef struct s_game {
-	mlx_t	*mlx;
-	t_map	*map;
+	mlx_t		*mlx;
+	t_map		*map;
+	t_player	*player;
+	mlx_image_t	*img;
 }				t_game;
 
 #endif

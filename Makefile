@@ -20,6 +20,7 @@ SRCS = main.c \
 	sources/parser/check_map.c \
 	sources/raycasting/raycasting.c \
 	sources/utils/utils.c \
+	sources/raycasting/draw_map.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -45,3 +46,7 @@ re: fclean all
 # to be deleted
 run: all
 	@./cub3D maps/1.cub
+
+test: tedt.c 
+	@$(CC)  tedt.c -o test $(DEPS) && ./test
+	@echo "Compilation done"

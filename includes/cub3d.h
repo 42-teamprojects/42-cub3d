@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 20:37:43 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:35:27 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,10 @@ t_map	*check_map(char **map);
 
 // Utils
 void	throw_err(char *err);
+
+// ryacasting
+
+int		draw_pixel(void);
+void	draw_sqr(int tmp_x, int tmp_y, int i, int j);
 
 #endif
