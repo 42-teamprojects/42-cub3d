@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 19:13:11 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:19:33 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,17 @@ int	is_valid_elements(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (ft_strrchr("01WNSE ", map[i][j]) == NULL)
+			if (ft_strchr("01WNSE ", map[i][j]) == NULL)
 				return (0);
-			i++;
+			if (ft_strchr("WNSE", map[i][j]))
+			{
+				g_game->player.x = j;
+				g_game->player.y = i;
+				g_game->player.dir = map[i][j];
+			}
+			j++;
 		}
+		i++;
 	}
 	return (1);
 }
@@ -93,7 +100,6 @@ char	**valid_map(char **map, int *cols, int *rows)
 {
 	*cols = count_cols(map);
 	*rows = ft_arrlen(map);
-	return (map);
 	return (is_valid_elements(map) ? map : NULL);
 }
 
@@ -110,8 +116,9 @@ t_map	*check_map(char **map)
 	_map->map = valid_map(map + _map->info->last, &_map->width, &_map->height);
 	if (!_map->map)
 		return (throw_err(ERR_ELEMS), NULL);
-	for (int i = 0; i < _map->height; i++) {
-		printf("%s\n", _map->map[i]);
-	}
+	// for (int i = 0; i < _map->height; i++) {
+	// 	printf("%s\n", _map->map[i]);
+	// }
+	// printf("player: %d %d\n", g_game->player.x, g_game->player.y);
 	return (_map);
 }

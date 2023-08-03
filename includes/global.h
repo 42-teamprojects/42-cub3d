@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 18:55:17 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:15:00 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_player {
 typedef struct s_game {
 	mlx_t		*mlx;
 	t_map		*map;
-	t_player	*player;
+	t_player	player;
 }				t_game;
 
 #endif
