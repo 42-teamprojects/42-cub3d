@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 21:19:33 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:24:49 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,9 @@ t_map	*check_map(char **map)
 	_map->map = valid_map(map + _map->info->last, &_map->width, &_map->height);
 	if (!_map->map)
 		return (throw_err(ERR_ELEMS), NULL);
-	// for (int i = 0; i < _map->height; i++) {
-	// 	printf("%s\n", _map->map[i]);
-	// }
-	// printf("player: %d %d\n", g_game->player.x, g_game->player.y);
+	for (int i = 0; i < _map->height; i++) {
+		printf("%s\n", _map->map[i]);
+	}
+	printf("player: %d %d\n", g_game->player.x, g_game->player.y);
 	return (_map);
 }

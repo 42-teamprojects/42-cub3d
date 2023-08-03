@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 17:43:01 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:43:51 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,12 @@ void	throw_err(char *err);
 void	free_arr(char **arr);
 int		ft_arrlen(char **arr);
 char	**ft_arrdup(char **arr);
+
+// raycasting
+
+int		draw_pixel(void);
+void	DDA(mlx_image_t **img, int X0, int Y0, int X1, int Y1);
+void 	draw_sqr(mlx_image_t **img, int i, int j);
+void 	draw_player(mlx_image_t **img, int i, int j);
+void 	put_elements(mlx_image_t **img);
 #endif
