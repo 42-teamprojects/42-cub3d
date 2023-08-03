@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 15:02:36 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:55:17 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define ERR_ARG "Please enter 1 map file as argument."
 # define ERR_INFO "Invalid map information."
 # define ERR_ELEMS "Map elements must be in the beginning of the file."
+# define ERR_MAP "Invalid map."
+# define ERR_RGB "Invalid RGB colors."
 // Game
 # define TILE_SIZE 64
 
@@ -44,20 +46,28 @@ typedef struct s_info {
 	char	*ea;
 	char	*_f;
 	char	*_c;
-	int		f;
-	char	c;
+	int		f[3];
+	int		c[3];
 	int		last;
 }				t_info;
 
 typedef struct s_map {
+	t_info	*info;
+	char	**map;
 	int		width;
 	int		height;
-	t_info	*info;
 }				t_map;
 
+typedef struct s_player {
+	int		x;
+	int		y;
+	char	dir;
+}				t_player;
+
 typedef struct s_game {
-	mlx_t	*mlx;
-	t_map	*map;
+	mlx_t		*mlx;
+	t_map		*map;
+	t_player	*player;
 }				t_game;
 
 #endif

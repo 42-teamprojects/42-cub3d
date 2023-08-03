@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 19:59:07 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 17:11:38 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/08/03 17:28:07 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/08/03 17:28:19 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include "cub3d.h"
+
+int	is_all_wall(char *line)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	int		i;
+	char	*tmp;
+
+	tmp = ft_strtrim(line, " ");
+	i = 0;
+	while (tmp[i])
+	{
+		if (tmp[i] != '1' && tmp[i] != ' ')
+			return (free(tmp), 0);
+		i++;
+	}
+	free(tmp);
+	return (1);
 }
 
-int	ft_isnum(char *s)
+int	found_info(t_info *info)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
+	if (!info->no || !info->so || !info->we || !info->ea \
+		|| !info->_f || !info->_c)
 	{
-		if (!ft_isdigit(s[i]))
-			return (0);
-		i++;
+		throw_err(ERR_ELEMS);
+		return (0);
 	}
 	return (1);
 }
