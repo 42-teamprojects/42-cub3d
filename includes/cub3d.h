@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 20:37:43 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 12:12:14 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_map	*check_map(char **map);
 
 // Utils
 void	throw_err(char *err);
+void	free_arr(char **arr);
 
 #endif

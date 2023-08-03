@@ -2,7 +2,7 @@ NAME = cub3D
 
 LIBFT = libft/libft.a
 
-CFLAGS = -Wall -Wextra -Werror -I includes/ -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I includes/ #-fsanitize=address -g
 
 CC = cc
 
@@ -20,6 +20,7 @@ SRCS = main.c \
 	sources/parser/check_map.c \
 	sources/raycasting/raycasting.c \
 	sources/utils/utils.c \
+	sources/utils/clean.c \
 
 OBJS = $(SRCS:.c=.o)
 

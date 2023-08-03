@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:58:06 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 21:04:57 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 14:32:32 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*read_map(int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		map = ft_strjoin(map, line);
+		map = ft_strjoin_gnl(map, line);
 		free(line);
 	}
 	return (map);
@@ -76,7 +76,8 @@ t_map	*get_map(char *file)
 	map_arr = ft_split(map_str, "\n");
 	free(map_str);
 	map = check_map(map_arr);
+	free_arr(map_arr);
 	if (!map)
-		return (0);
+		exit(1);
 	return (map);
 }

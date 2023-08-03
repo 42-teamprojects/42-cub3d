@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 12:56:06 by yelaissa         ###   ########.fr       */
+/*   Created: 2023/08/03 12:06:12 by yelaissa          #+#    #+#             */
+/*   Updated: 2023/08/03 12:12:03 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_map	*parser(char *file)
+void	free_arr(char **arr)
 {
-	t_map	*map;
+	int	i;
 
-	map = (t_map *) malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
-	map = get_map(file);
-	map->width = 1280;
-	map->height = 720;
-	return (map);
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }

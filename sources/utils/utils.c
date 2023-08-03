@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/02 19:33:00 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/03 12:54:48 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	throw_err(char *err)
 {
-	ft_printf_fd(2, "Error\n%s\n", err);
+	ft_printf_fd(2, BRED "Error\n"CX"%s\n", err);
 }
