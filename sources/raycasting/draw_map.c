@@ -6,11 +6,12 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/03 21:45:25 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:06:15 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+# define PI 3.1415926535
 
 int get_rgba(int r, int g, int b, float a)
 {
@@ -69,25 +70,10 @@ void put_elements(mlx_image_t **img)
         {
             draw_sqr(img, x, y);
         }
+        draw_player(img, g_game->player.x, g_game->player.y);
     }
-    draw_player(img, g_game->player.x, g_game->player.y);
-    DDA(img, g_game->player.x, g_game->player.y, g_game->player.x - TILE_SIZE, g_game->player.y - TILE_SIZE);
+    // DDA(img, g_game->player.x, g_game->player.y, g_game->player.x - TILE_SIZE , g_game->player.y - TILE_SIZE);
 }
-// void ft_hook(void* param)
-// {
-// 	mlx_t* mlx = param;
-
-// 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-// 		mlx_close_window(mlx);
-// 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-// 		g_game->img->instances[0].y -= 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-// 		g_game->img->instances[0].y += 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-// 		g_game->img->instances[0].x -= 5;
-// 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-// 		g_game->img->instances[0].x += 5;
-// }
 
 
 void DDA(mlx_image_t **img, int X0, int Y0, int X1, int Y1)
@@ -108,6 +94,20 @@ void DDA(mlx_image_t **img, int X0, int Y0, int X1, int Y1)
     }
 }
 
+void draw_angle_dda(mlx_image_t **img)
+{
+    float dx;
+    float dy;
+    float angle = 0;
+    float x = g_game->player.x * TILE_SIZE;
+    float y = g_game->player.y * TILE_SIZE;
+
+    angle += (3 * M_PI);
+    dx = x + cos(angle) * 50;
+    dy = y - sin(angle) * 50;
+    DDA(img, x, y, dx , dy);
+}
+
 int draw_pixel(void)
 {
     mlx_image_t *img;
@@ -118,7 +118,23 @@ int draw_pixel(void)
     if (mlx_image_to_window(g_game->mlx, img, 0, 0) < 0)
         return (1);
     put_elements(&img);
-    // mlx_loop_hook(g_game->mlx, ft_hook, g_game->mlx);
+    draw_angle_dda(&img);
+    mlx_loop_hook(g_game->mlx, ft_hook, g_game->mlx);
     mlx_loop(g_game->mlx);
     return (0);
+}
+void ft_hook(void* param)
+{
+	mlx_t* mlx = param;
+
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+		g_game->player.y -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		g_game->player.y += 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		g_game->player.x -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		g_game->player.x += 5;
 }
