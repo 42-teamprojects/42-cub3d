@@ -21,6 +21,7 @@ int	init_game(char *file)
 	if (!g_game->mlx)
 		return (1);
 	draw_pixel();
+	system("leaks cub3D -q");
 	return (0);
 }
 

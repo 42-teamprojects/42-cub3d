@@ -64,10 +64,16 @@ typedef struct s_player {
 	char	dir;
 }				t_player;
 
+typedef struct s_imgs {
+	mlx_image_t	*map;
+	mlx_image_t	*player;
+}				t_imgs;
+
 typedef struct s_game {
 	mlx_t		*mlx;
 	t_map		*map;
 	t_player	player;
+	t_imgs		*imgs;
 }				t_game;
 
 #endif

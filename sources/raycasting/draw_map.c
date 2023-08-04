@@ -112,13 +112,13 @@ int draw_pixel(void)
 {
     mlx_image_t *img;
 
-    img = mlx_new_image(g_game->mlx, 1280, 720);
+    img = mlx_new_image(g_game->mlx, g_game->map->width \
+        * TILE_SIZE, g_game->map->height * TILE_SIZE);
     if (!img)
         return (1);
     if (mlx_image_to_window(g_game->mlx, img, 0, 0) < 0)
         return (1);
     put_elements(&img);
     // mlx_loop_hook(g_game->mlx, ft_hook, g_game->mlx);
-    mlx_loop(g_game->mlx);
     return (0);
 }
