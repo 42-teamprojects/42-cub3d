@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 21:43:51 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:57:12 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int		is_all_wall(char *line);
 int		find_info(char *line, t_info *info);
 t_info	*check_infos(char **map);
 int		valid_info(t_info **info);
+void	save_player_info(int i, int j, char dir);
+int		count_cols(char **map);
+int		is_valid_elements(char **map);
+int		is_one_wnse(char **map);
+int		is_surrounded(char **map);
 
 // Utils
 void	throw_err(char *err);

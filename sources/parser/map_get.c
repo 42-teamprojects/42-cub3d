@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map.c                                          :+:      :+:    :+:   */
+/*   map_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:58:06 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 14:32:32 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:55:58 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,36 @@ char	*read_map(int fd)
 	}
 	close(fd);
 	return (map);
+}
+
+int	valid_map(char **map, int *cols, int *rows)
+{
+	*cols = count_cols(map);
+	*rows = ft_arrlen(map);
+
+	if (!is_valid_elements(map))
+		return (throw_err(ERR_ELEMS), 0);
+	if (!is_one_wnse(map))
+		return (throw_err(ERR_PLAYERS), 0);
+	if (!is_surrounded(map))
+		return (throw_err(ERR_WALL), 0);
+	return (1);
+}
+
+t_map	*check_map(char **map)
+{
+	t_map	*_map;
+
+	_map = (t_map *) malloc(sizeof(t_map));
+	if (!_map)
+		return (NULL);
+	_map->info = check_infos(map);
+	if (!_map->info || (_map->info && !valid_info(&(_map->info))))
+		return (NULL);
+	_map->map = ft_arrdup(map + _map->info->last);
+	if (!valid_map(_map->map, &_map->width, &_map->height))
+		return (free_map(_map), NULL);
+	return (_map);
 }
 
 t_map	*get_map(char *file)

@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusufisawi <yusufisawi@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/04 15:08:22 by yusufisawi       ###   ########.fr       */
+/*   Updated: 2023/08/04 15:55:29 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	save_player_info(int i, int j, char dir)
+{
+	g_game->player.x = j;
+	g_game->player.y = i;
+	g_game->player.dir = dir;
+	if (dir == 'N')
+		g_game->player.angle = 1.5 * M_PI;
+	else if (dir == 'S')
+		g_game->player.angle = 0.5 * M_PI;
+	else if (dir == 'E')
+		g_game->player.angle = 0;
+	else
+		g_game->player.angle = M_PI;
+}
 
 int	count_cols(char **map)
 {
@@ -42,11 +57,7 @@ int	is_valid_elements(char **map)
 			if (ft_strchr("01WNSE ", map[i][j]) == NULL)
 				return (0);
 			if (ft_strchr("WNSE", map[i][j]))
-			{
-				g_game->player.x = j;
-				g_game->player.y = i;
-				g_game->player.dir = map[i][j];
-			}
+				save_player_info(i, j, map[i][j]);
 			j++;
 		}
 		i++;
@@ -99,34 +110,3 @@ int is_surrounded(char **map)
 	}
 	return (1);
 }
-
-int	valid_map(char **map, int *cols, int *rows)
-{
-	*cols = count_cols(map);
-	*rows = ft_arrlen(map);
-
-	if (!is_valid_elements(map))
-		return (throw_err(ERR_ELEMS), 0);
-	if (!is_one_wnse(map))
-		return (throw_err(ERR_PLAYERS), 0);
-	if (!is_surrounded(map))
-		return (throw_err(ERR_WALL), 0);
-	return (1);
-}
-
-t_map	*check_map(char **map)
-{
-	t_map	*_map;
-
-	_map = (t_map *) malloc(sizeof(t_map));
-	if (!_map)
-		return (NULL);
-	_map->info = check_infos(map);
-	if (!_map->info || (_map->info && !valid_info(&(_map->info))))
-		return (NULL);
-	_map->map = ft_arrdup(map + _map->info->last);
-	if (!valid_map(_map->map, &_map->width, &_map->height))
-		return (free_map(_map), NULL);
-	return (_map);
-}
-
