@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 15:29:30 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/04 16:20:21 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:43:36 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int	init_game(char *file)
 		g_game->map->height * TILE_SIZE, "Cub3D", true);
 	if (!g_game->mlx)
 		return (1);
-	// g_game->player.x *= TILE_SIZE;
-	// g_game->player.y *= TILE_SIZE;
-	draw_pixel();
+	mlx_loop_hook(g_game->mlx, ft_hook, g_game->mlx);
+	put_pixels();
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusufisawi <yusufisawi@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/04 15:26:28 by yusufisawi       ###   ########.fr       */
+/*   Updated: 2023/08/04 17:58:32 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct s_map {
 }				t_map;
 
 typedef struct s_player {
-	int		x;
-	int		y;
+	float	x;
+	float	y;
 	char	dir;
 	float	angle;
 }				t_player;
@@ -76,6 +76,8 @@ typedef struct s_game {
 	t_map		*map;
 	t_player	player;
 	t_imgs		*imgs;
+	mlx_image_t	*img_map;
+	mlx_image_t	*img_player;
 }				t_game;
 
 #endif
