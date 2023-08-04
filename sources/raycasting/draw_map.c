@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/04 18:38:31 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/04 21:55:39 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,40 @@ void	draw_pixels(mlx_image_t **img, int h, int w, int color)
 	int	j;
 
 	i = h;
-	while (i <= h + TILE_SIZE)
+	while (i < h + TILE_SIZE)
 	{
 		j = w;
-		while (j <= w + TILE_SIZE)
+		while (j < w + TILE_SIZE)
 		{
 			mlx_put_pixel(*img, i, j, color);
 			j++;
 		}
+		mlx_put_pixel(*img, i, j, color);
 		i++;
 	}
 }
 
+void	draw_pixelsv2(mlx_image_t **img, int h, int w, int color)
+{
+	int	i;
+	int	j;
+
+	i = h;
+	while (i < h + TILE_SIZE / 2)
+	{
+		j = w;
+		while (j < w + TILE_SIZE / 2)
+		{
+			mlx_put_pixel(*img, i, j, color);
+			j++;
+		mlx_put_pixel(*img, i, j, color);
+		}
+		i++;
+	}
+}
 void	draw_player(mlx_image_t **img, float x, float y)
 {
-	draw_pixels(img, x * TILE_SIZE, y * TILE_SIZE, get_rgba(0, 0, 255, 1));
+	draw_pixelsv2(img, x * TILE_SIZE, y * TILE_SIZE, get_rgba(0, 0, 255, 1));
 }
 
 void	draw_map()
@@ -100,7 +119,7 @@ int put_pixels(void)
 {
     g_game->img_map = mlx_new_image(g_game->mlx, g_game->map->width \
         * TILE_SIZE, g_game->map->height * TILE_SIZE);
-    g_game->img_player = mlx_new_image(g_game->mlx, TILE_SIZE/2, TILE_SIZE/2);
+    g_game->img_player = mlx_new_image(g_game->mlx, TILE_SIZE / 2, TILE_SIZE / 2);
     if (!g_game->img_map || !g_game->img_player)
         return (1);
     if (mlx_image_to_window(g_game->mlx, g_game->img_map, 0, 0) < 0)
@@ -174,6 +193,5 @@ void ft_hook(void* param)
 		g_game->player.angle += rot_speed;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		g_game->player.angle -= rot_speed;
-
 	draw_map();
 }
