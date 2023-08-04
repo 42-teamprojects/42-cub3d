@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/04 15:57:12 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:14:34 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,6 @@ void	DDA(mlx_image_t **img, int X0, int Y0, int X1, int Y1);
 void 	draw_sqr(mlx_image_t **img, int x, int y);
 void 	draw_player(mlx_image_t **img, int i, int j);
 void 	put_elements(mlx_image_t **img);
+void	draw_angle_dda(mlx_image_t **img);
+void	ft_hook(void* param);
 #endif
