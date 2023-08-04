@@ -27,7 +27,7 @@
 # define ERR_MAP "Invalid map."
 # define ERR_RGB "Invalid RGB colors."
 // Game
-# define TILE_SIZE 64
+# define TILE_SIZE 30
 
 # include "../libft/libft.h"
 # include <fcntl.h>

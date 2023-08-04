@@ -57,6 +57,7 @@ char	*read_map(int fd)
 		map = ft_strjoin_gnl(map, line);
 		free(line);
 	}
+	close(fd);
 	return (map);
 }
 

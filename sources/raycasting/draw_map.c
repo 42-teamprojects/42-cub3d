@@ -20,67 +20,59 @@ int get_rgba(int r, int g, int b, float a)
     return (color);
 }
 
-void draw_sqr(mlx_image_t **img, int i, int j)
+void draw_player(mlx_image_t **img, int x, int y)
 {
     int tmp_x, tmp_y;
 
-    tmp_x = i * TILE_SIZE;
-    while (tmp_x < i * TILE_SIZE + TILE_SIZE - 1)
+    tmp_y = y * TILE_SIZE;
+    while (tmp_y < y * TILE_SIZE + TILE_SIZE / 2)
     {
-        tmp_y = j * TILE_SIZE;
-        while (tmp_y < j * TILE_SIZE + TILE_SIZE - 1)
+        tmp_x = x * TILE_SIZE;
+        while (tmp_x < x * TILE_SIZE + TILE_SIZE / 2)
         {
-            if(g_game->map->map[i][j] == '1')
-                    mlx_put_pixel(*img, tmp_x, tmp_y ,  get_rgba(255, 150, 0, 2));
-
-            tmp_y++;
-            mlx_put_pixel(*img, tmp_x, tmp_y , 0xffffffff);
+            mlx_put_pixel(*img, tmp_x, tmp_y , get_rgba(0, 0, 255, 1));
+            tmp_x++;
         }
-        tmp_x++;
-        mlx_put_pixel(*img, tmp_x, tmp_y , get_rgba(0, 255, 0, 1));
+        tmp_y++;
     }
 }
 
-void draw_player(mlx_image_t **img, int i, int j)
+void draw_sqr(mlx_image_t **img, int x, int y)
 {
     int tmp_x, tmp_y;
 
-    tmp_x = i * TILE_SIZE;
-    while (tmp_x < i * TILE_SIZE + TILE_SIZE - 50)
+    tmp_y = y * TILE_SIZE;
+    while (tmp_y < y * TILE_SIZE + TILE_SIZE - 1)
     {
-        tmp_y = j * TILE_SIZE;
-    while (tmp_y < j * TILE_SIZE + TILE_SIZE - 50)
-    {
-        mlx_put_pixel(*img, tmp_x, tmp_y , get_rgba(0, 0, 255, 1));
+        tmp_x = x * TILE_SIZE;
+        while (tmp_x < x * TILE_SIZE + TILE_SIZE - 1)
+        {
+            if(g_game->map->map[y][x] == '1')
+                    mlx_put_pixel(*img, tmp_x, tmp_y ,  get_rgba(255, 150, 0, 2));
+            tmp_x++;
+            mlx_put_pixel(*img, tmp_x, tmp_y , 0xffffffff);
+        }
         tmp_y++;
-    }
-        tmp_x++;
+        mlx_put_pixel(*img, tmp_x, tmp_y , get_rgba(0, 255, 0, 1));
     }
 }
 
 void put_elements(mlx_image_t **img)
 {
-    // (void)img;
-	int j = 0;
-	int i = -1;
-    int tmp_x;
-    int tmp_y;
-	
-    tmp_x = i * TILE_SIZE;
-    tmp_y = j * TILE_SIZE;
-    while (++i < 10)
+    int x;
+    int y = -1;
+
+    while (++y < g_game->map->height)
     {
-        j = 0;
-        while (j < 10)
+        x = -1;
+        while (++x < g_game->map->width)
         {
-            draw_sqr(img, i, j);
-            j++;
+            draw_sqr(img, x, y);
         }
     }
-    // draw_player(img, g_game->player.x, g_game->player.y);
-    // DDA(img, g_game->player.x * TILE_SIZE, g_game->player.y * TILE_SIZE, (g_game->player.x + 5) * TILE_SIZE, (g_game->player.y + 5) * TILE_SIZE);
+    draw_player(img, g_game->player.x, g_game->player.y);
+    DDA(img, g_game->player.x, g_game->player.y, g_game->player.x - TILE_SIZE, g_game->player.y - TILE_SIZE);
 }
-
 // void ft_hook(void* param)
 // {
 // 	mlx_t* mlx = param;
@@ -106,8 +98,8 @@ void DDA(mlx_image_t **img, int X0, int Y0, int X1, int Y1)
     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     float Xinc = dx / (float)steps;
     float Yinc = dy / (float)steps;
-    float X = X0;
-    float Y = Y0;
+    float X = g_game->player.x * TILE_SIZE;
+    float Y = g_game->player.y * TILE_SIZE;
     for (int i = 0; i <= steps; i++)
     {
         mlx_put_pixel(*img, X, Y , get_rgba(0, 0, 255, 1));
@@ -119,6 +111,7 @@ void DDA(mlx_image_t **img, int X0, int Y0, int X1, int Y1)
 int draw_pixel(void)
 {
     mlx_image_t *img;
+
     img = mlx_new_image(g_game->mlx, 1280, 720);
     if (!img)
         return (1);

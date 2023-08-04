@@ -38,7 +38,7 @@ char	**ft_arrdup(char **arr);
 
 int		draw_pixel(void);
 void	DDA(mlx_image_t **img, int X0, int Y0, int X1, int Y1);
-void 	draw_sqr(mlx_image_t **img, int i, int j);
+void 	draw_sqr(mlx_image_t **img, int x, int y);
 void 	draw_player(mlx_image_t **img, int i, int j);
 void 	put_elements(mlx_image_t **img);
 #endif

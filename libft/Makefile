@@ -16,6 +16,7 @@ SRCS = ft_isalpha.c \
       ft_tolowercase.c \
       ft_strchr.c \
       ft_calloc.c \
+      ft_utils.c \
       ft_strrchr.c \
       ft_strlen.c \
       ft_atoi.c \
@@ -71,7 +72,7 @@ RM			= rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) libft.h $(SRCS)
+$(NAME):	$(OBJS)
 		ar rcs $@ $^
 
 

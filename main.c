@@ -16,11 +16,11 @@ int	init_game(char *file)
 {
 	g_game = (t_game *) malloc(sizeof(t_game));
 	g_game->map = parser(file);
-	g_game->mlx = mlx_init(g_game->map->width, \
-		g_game->map->height, "Cub3D", 0);
+	g_game->mlx = mlx_init(g_game->map->width * TILE_SIZE, \
+		g_game->map->height * TILE_SIZE, "Cub3D", true);
 	if (!g_game->mlx)
 		return (1);
-	// draw_pixel();
+	draw_pixel();
 	return (0);
 }
 

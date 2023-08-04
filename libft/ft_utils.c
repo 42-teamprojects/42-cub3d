@@ -23,9 +23,9 @@ int	has_spaces_on_sides(char const *s)
 	size_t	len;
 
 	len = strlen(s);
-	if (isspace(s[0]))
+	if (ft_isspace(s[0]))
 		return (1);
-	if (len > 0 && isspace(s[len - 1]))
+	if (len > 0 && ft_isspace(s[len - 1]))
 		return (1);
 	return (0);
 }
