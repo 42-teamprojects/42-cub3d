@@ -33,6 +33,10 @@ void	throw_err(char *err);
 void	free_arr(char **arr);
 int		ft_arrlen(char **arr);
 char	**ft_arrdup(char **arr);
+// Clean up
+void	free_game(t_game *game);
+void	free_map(t_map *map);
+void	free_info(t_info *info);
 
 // raycasting
 

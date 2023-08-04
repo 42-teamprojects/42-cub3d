@@ -32,6 +32,8 @@ char	**ft_arrdup(char **arr)
 	char	**new;
 	int		i;
 
+	if (!arr)
+		return (NULL);
 	new = (char **) ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 	if (!new)
 		return (NULL);

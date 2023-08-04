@@ -82,6 +82,6 @@ int	valid_info(t_info **info)
 {
 	if (!valid_rgb((*info)->_f, (*info)->f) \
 		|| !valid_rgb((*info)->_c, (*info)->c))
-		return (throw_err(ERR_RGB), 0);
+		return (throw_err(ERR_RGB), free_info(*info), 0);
 	return (1);
 }

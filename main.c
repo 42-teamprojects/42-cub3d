@@ -21,7 +21,6 @@ int	init_game(char *file)
 	if (!g_game->mlx)
 		return (1);
 	draw_pixel();
-	system("leaks cub3D -q");
 	return (0);
 }
 
@@ -31,7 +30,9 @@ int	main(int ac, char **av)
 		return (throw_err(ERR_ARG), 1);
 	if (init_game(av[1]))
 		return (1);
+	// system("leaks cub3D -q");
 	mlx_loop(g_game->mlx);
 	mlx_terminate(g_game->mlx);
+	// free_game(g_game);
 	return (0);
 }

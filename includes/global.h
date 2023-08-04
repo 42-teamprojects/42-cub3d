@@ -26,6 +26,7 @@
 # define ERR_ELEMS "Map elements must be in the beginning of the file."
 # define ERR_MAP "Invalid map."
 # define ERR_RGB "Invalid RGB colors."
+# define ERR_PLAYERS "There must be one player in the map."
 // Game
 # define TILE_SIZE 30
 
