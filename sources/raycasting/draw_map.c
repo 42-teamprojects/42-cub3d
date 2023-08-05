@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/05 10:39:42 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/05 12:32:55 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	draw_pixels(mlx_image_t **img, int h, int w, int color)
 {
 	int	i;
 	int	j;
+	(void)color;
 
 	i = h;
 	while (i < h + TILE_SIZE)
@@ -33,37 +34,69 @@ void	draw_pixels(mlx_image_t **img, int h, int w, int color)
 		{
 			mlx_put_pixel(*img, i, j, color);
 			j++;
+			mlx_put_pixel(g_game->img_map, i, j, get_rgba(5, 15, 255, 1));
 		}
-		mlx_put_pixel(*img, i, j, color);
+		mlx_put_pixel(*img, i, j, get_rgba(255, 255, 255, 1));
 		i++;
 	}
 }
 
-void	draw_pixelsv2(mlx_image_t **img, int h, int w, int color)
+void	draw_pixels3()
+{
+	int	x;
+	int	y;
+	
+	x = 0;
+	while (x < g_game->map->width * TILE_SIZE)
+	{
+		y = 0;
+		while (y < g_game->map->height * TILE_SIZE)
+		{
+			mlx_put_pixel(g_game->img_map, x, y, get_rgba(5, 15, 255, 1));
+			y++;
+		}
+		x += TILE_SIZE;
+	}
+	x = 0;
+	y = 0;
+	while (y < g_game->map->height * TILE_SIZE)
+	{
+		x = 0;
+		while (x < g_game->map->width * TILE_SIZE)
+		{
+			mlx_put_pixel(g_game->img_map, x, y, get_rgba(5, 15, 255, 1));
+			x++;
+		}
+		y += TILE_SIZE;
+	}
+}
+
+
+void	draw_pixelsv2(mlx_image_t **img, int posx, int posy, int color)
 {
 	int	i;
 	int	j;
 
-	i = h;
-	while (i < h + TILE_SIZE / 2)
+	i = posx - 3;
+	while (i < (posx +  (TILE_SIZE / 4)) - 3 )
 	{
-		j = w;
-		while (j < w + TILE_SIZE / 2)
+		j = posy - 3;
+		while (j < posy +  (TILE_SIZE / 4) - 3 )
 		{
 			mlx_put_pixel(*img, i, j, color);
 			j++;
-		mlx_put_pixel(*img, i, j, color);
 		}
 		i++;
 	}
 }
 void	draw_player(mlx_image_t **img, float x, float y)
 {
-	draw_pixelsv2(img, x * TILE_SIZE, y * TILE_SIZE, get_rgba(0, 0, 255, 1));
+	draw_pixelsv2(img, x, y, 0xFF0000FF);
 }
 
 void	draw_map()
 {
+
 	int	i;
 	int	j;
 
@@ -81,8 +114,10 @@ void	draw_map()
 		}
 		i++;
 	}
-	draw_player(&g_game->img_map, g_game->player.x, g_game->player.y);
+	draw_pixels3();
+	draw_player(&g_game->img_map, (g_game->player.x * TILE_SIZE) + (TILE_SIZE / 2), (g_game->player.y * TILE_SIZE) + (TILE_SIZE / 2));
     draw_angle_dda(&g_game->img_map);
+	
 }
 
 void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
@@ -93,8 +128,8 @@ void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     float Xinc = dx / (float)steps;
     float Yinc = dy / (float)steps;
-    float X = (g_game->player.x * TILE_SIZE) + (TILE_SIZE / 4);
-    float Y = (g_game->player.y * TILE_SIZE) + (TILE_SIZE / 4);
+    float X = (g_game->player.x * TILE_SIZE) + (TILE_SIZE / 2);
+    float Y = (g_game->player.y * TILE_SIZE) + (TILE_SIZE / 2);
     for (int i = 0; i <= steps; i++)
     {
         mlx_put_pixel(*img, X, Y, get_rgba(0, 100, 150, 1));
@@ -110,29 +145,14 @@ void draw_angle_dda(mlx_image_t **img)
 
 	float x = g_game->player.x * TILE_SIZE;
     float y = g_game->player.y * TILE_SIZE;
-
-    dx = x + cos(g_game->player.angle) * TILE_SIZE;
-    dy = y + sin(g_game->player.angle) * TILE_SIZE;
+    dx = x + cos(g_game->player.angle)  *TILE_SIZE ;
+    dy = y + sin(g_game->player.angle)  *TILE_SIZE ;
     DDA(img, x, y, dx , dy);
-}
-
-int put_pixels(void)
-{
-    g_game->img_map = mlx_new_image(g_game->mlx, g_game->map->width \
-        * TILE_SIZE, g_game->map->height * TILE_SIZE);
-    g_game->img_player = mlx_new_image(g_game->mlx, TILE_SIZE / 2, TILE_SIZE / 2);
-    if (!g_game->img_map || !g_game->img_player)
-        return (1);
-    if (mlx_image_to_window(g_game->mlx, g_game->img_map, 0, 0) < 0)
-        return (1);
-    if (mlx_image_to_window(g_game->mlx, g_game->img_player, 0, 0) < 0)
-        return (1);
-    return (0);
 }
 
 void move_forward(float move_speed)
 {
-	if (g_game->map->map[(int)(g_game->player.y)]\
+	if (g_game->map->map[(int)g_game->player.y]\
 		[(int)(g_game->player.x + cos(g_game->player.angle) * move_speed)] != '1')
 	{
 		g_game->player.x += cos(g_game->player.angle) * move_speed;
@@ -172,27 +192,26 @@ void move_right(float move_speed)
 
 void ft_hook(void* param)
 {
-	mlx_t* mlx;
+	(void)param;
 	float move_speed;
 	float rot_speed;
 
-	mlx = param;
 	move_speed = 0.05;
 	rot_speed = 0.05;
 
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_W))
+	if (mlx_is_key_down(g_game->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(g_game->mlx);
+	if (mlx_is_key_down(g_game->mlx, MLX_KEY_W))
 		move_forward(move_speed);
-	if (mlx_is_key_down(mlx, MLX_KEY_S))
+	if (mlx_is_key_down(g_game->mlx, MLX_KEY_S))
 		move_backward(move_speed);
-	if (mlx_is_key_down(mlx, MLX_KEY_A))
+	if (mlx_is_key_down(g_game->mlx, MLX_KEY_A))
 		move_left(move_speed);
-	if (mlx_is_key_down(mlx, MLX_KEY_D))
+	if (mlx_is_key_down(g_game->mlx, MLX_KEY_D))
 		move_right(move_speed);
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(g_game->mlx, MLX_KEY_LEFT))
 		g_game->player.angle += rot_speed;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(g_game->mlx, MLX_KEY_RIGHT))
 		g_game->player.angle -= rot_speed;
 	draw_map();
 }
