@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/04 21:55:39 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:39:42 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     float Xinc = dx / (float)steps;
     float Yinc = dy / (float)steps;
-    float X = g_game->player.x * TILE_SIZE;
-    float Y = g_game->player.y * TILE_SIZE;
+    float X = (g_game->player.x * TILE_SIZE) + (TILE_SIZE / 4);
+    float Y = (g_game->player.y * TILE_SIZE) + (TILE_SIZE / 4);
     for (int i = 0; i <= steps; i++)
     {
-        mlx_put_pixel(*img, X, Y, get_rgba(0, 0, 255, 1));
+        mlx_put_pixel(*img, X, Y, get_rgba(0, 100, 150, 1));
         X += Xinc;
         Y += Yinc;
     }
@@ -105,13 +105,14 @@ void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
 
 void draw_angle_dda(mlx_image_t **img)
 {
-    float dx;
-    float dy;
-    float x = g_game->player.x * TILE_SIZE;
+	float dx;
+	float dy;
+
+	float x = g_game->player.x * TILE_SIZE;
     float y = g_game->player.y * TILE_SIZE;
 
     dx = x + cos(g_game->player.angle) * TILE_SIZE;
-    dy = y - sin(g_game->player.angle) * TILE_SIZE;
+    dy = y + sin(g_game->player.angle) * TILE_SIZE;
     DDA(img, x, y, dx , dy);
 }
 
@@ -135,7 +136,7 @@ void move_forward(float move_speed)
 		[(int)(g_game->player.x + cos(g_game->player.angle) * move_speed)] != '1')
 	{
 		g_game->player.x += cos(g_game->player.angle) * move_speed;
-		g_game->player.y -= sin(g_game->player.angle) * move_speed;
+		g_game->player.y += sin(g_game->player.angle) * move_speed;
 	}
 }
 
@@ -145,7 +146,7 @@ void move_backward(float move_speed)
 		[(int)(g_game->player.x - cos(g_game->player.angle) * move_speed)] != '1')
 	{
 		g_game->player.x -= cos(g_game->player.angle) * move_speed;
-		g_game->player.y += sin(g_game->player.angle) * move_speed;
+		g_game->player.y -= sin(g_game->player.angle) * move_speed;
 	}
 }
 
@@ -154,7 +155,7 @@ void move_left(float move_speed)
 	if (g_game->map->map[(int)(g_game->player.y - cos(g_game->player.angle) * move_speed)]\
 		[(int)(g_game->player.x)] != '1')
 	{
-		g_game->player.x -= sin(g_game->player.angle) * move_speed;
+		g_game->player.x += sin(g_game->player.angle) * move_speed;
 		g_game->player.y -= cos(g_game->player.angle) * move_speed;
 	}
 }
@@ -164,7 +165,7 @@ void move_right(float move_speed)
 	if (g_game->map->map[(int)(g_game->player.y + cos(g_game->player.angle) * move_speed)]\
 		[(int)(g_game->player.x)] != '1')
 	{
-		g_game->player.x += sin(g_game->player.angle) * move_speed;
+		g_game->player.x -= sin(g_game->player.angle) * move_speed;
 		g_game->player.y += cos(g_game->player.angle) * move_speed;
 	}
 }
