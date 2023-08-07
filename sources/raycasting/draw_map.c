@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/07 12:00:11 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:23:37 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,14 @@ void	draw_map()
 			if (g_game->map->map[i][j] == '1')
 				draw_pixels(&g_game->img_map, j * TILE_SIZE, i * TILE_SIZE, get_rgba(255, 255, 255, 1));
 			else if (g_game->map->map[i][j] == '0' || ft_strchr("NSEW", g_game->map->map[i][j]))
-				draw_pixels(&g_game->img_map, j * TILE_SIZE, i * TILE_SIZE, get_rgba(0, 0, 0, 1));
+					draw_pixels(&g_game->img_map, j * TILE_SIZE, i * TILE_SIZE, get_rgba(0, 0, 0, 1));
 			j++;
 		}
 		i++;
 	}
 	draw_pixels3();
 	draw_player(&g_game->img_map, g_game->player.x, g_game->player.y);
-    draw_angle_dda(&g_game->img_map);
-	
+	cast_ray();
 }
 
 void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
@@ -136,15 +135,15 @@ void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
     }
 }
 
-void draw_angle_dda(mlx_image_t **img)
+void draw_angle_dda(mlx_image_t **img, float ray_angle)
 {
 	float dx;
 	float dy;
 
 	float x = g_game->player.x;
     float y = g_game->player.y;
-    dx = x + cos(g_game->player.angle)  *TILE_SIZE ;
-    dy = y + sin(g_game->player.angle)  *TILE_SIZE ;
+    dx = x + cos(ray_angle)  * TILE_SIZE ;
+    dy = y + sin(ray_angle)  * TILE_SIZE ;
     DDA(img, x, y, dx , dy);
 }
 
@@ -179,6 +178,7 @@ void move_left(float move_speed)
 		g_game->player.x += sin(g_game->player.angle) * move_speed;
 		g_game->player.y -= cos(g_game->player.angle) * move_speed;
 	}
+
 }
 
 void move_right(float move_speed)
