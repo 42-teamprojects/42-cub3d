@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/05 12:32:55 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/07 09:46:09 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ void	draw_pixels(mlx_image_t **img, int h, int w, int color)
 		{
 			mlx_put_pixel(*img, i, j, color);
 			j++;
-			mlx_put_pixel(g_game->img_map, i, j, get_rgba(5, 15, 255, 1));
 		}
-		mlx_put_pixel(*img, i, j, get_rgba(255, 255, 255, 1));
 		i++;
 	}
 }
@@ -210,8 +208,8 @@ void ft_hook(void* param)
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_D))
 		move_right(move_speed);
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_LEFT))
-		g_game->player.angle += rot_speed;
-	if (mlx_is_key_down(g_game->mlx, MLX_KEY_RIGHT))
 		g_game->player.angle -= rot_speed;
+	if (mlx_is_key_down(g_game->mlx, MLX_KEY_RIGHT))
+		g_game->player.angle += rot_speed;
 	draw_map();
 }
