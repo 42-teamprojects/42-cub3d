@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/04 18:15:59 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:13:14 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ int		put_pixels(void);
 void	DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1);
 void	draw_angle_dda(mlx_image_t **img);
 void	ft_hook(void* param);
+void	draw_map();
 #endif

@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/07 09:46:09 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:00:11 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	draw_map()
 		i++;
 	}
 	draw_pixels3();
-	draw_player(&g_game->img_map, (g_game->player.x * TILE_SIZE) + (TILE_SIZE / 2), (g_game->player.y * TILE_SIZE) + (TILE_SIZE / 2));
+	draw_player(&g_game->img_map, g_game->player.x, g_game->player.y);
     draw_angle_dda(&g_game->img_map);
 	
 }
@@ -126,8 +126,8 @@ void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     float Xinc = dx / (float)steps;
     float Yinc = dy / (float)steps;
-    float X = (g_game->player.x * TILE_SIZE) + (TILE_SIZE / 2);
-    float Y = (g_game->player.y * TILE_SIZE) + (TILE_SIZE / 2);
+    float X = g_game->player.x;
+    float Y = g_game->player.y;
     for (int i = 0; i <= steps; i++)
     {
         mlx_put_pixel(*img, X, Y, get_rgba(0, 100, 150, 1));
@@ -141,8 +141,8 @@ void draw_angle_dda(mlx_image_t **img)
 	float dx;
 	float dy;
 
-	float x = g_game->player.x * TILE_SIZE;
-    float y = g_game->player.y * TILE_SIZE;
+	float x = g_game->player.x;
+    float y = g_game->player.y;
     dx = x + cos(g_game->player.angle)  *TILE_SIZE ;
     dy = y + sin(g_game->player.angle)  *TILE_SIZE ;
     DDA(img, x, y, dx , dy);
@@ -150,28 +150,31 @@ void draw_angle_dda(mlx_image_t **img)
 
 void move_forward(float move_speed)
 {
-	if (g_game->map->map[(int)g_game->player.y]\
-		[(int)(g_game->player.x + cos(g_game->player.angle) * move_speed)] != '1')
+	float var = g_game->player.x + cos(g_game->player.angle) * move_speed;
+	float var2 = g_game->player.y + sin(g_game->player.angle) * move_speed;
+	if (g_game->map->map[(int)(var2 / TILE_SIZE)][(int)((var / TILE_SIZE))] != '1')
 	{
-		g_game->player.x += cos(g_game->player.angle) * move_speed;
-		g_game->player.y += sin(g_game->player.angle) * move_speed;
+		g_game->player.x = var;
+		g_game->player.y = var2;
 	}
 }
 
 void move_backward(float move_speed)
 {
-	if (g_game->map->map[(int)(g_game->player.y)]\
-		[(int)(g_game->player.x - cos(g_game->player.angle) * move_speed)] != '1')
+	float var = g_game->player.x - cos(g_game->player.angle) * move_speed;
+	float var2 = g_game->player.y - sin(g_game->player.angle) * move_speed;
+	if (g_game->map->map[(int)(var2 / TILE_SIZE)]\
+		[(int)(var / TILE_SIZE)] != '1')
 	{
-		g_game->player.x -= cos(g_game->player.angle) * move_speed;
-		g_game->player.y -= sin(g_game->player.angle) * move_speed;
+		g_game->player.x = var;
+		g_game->player.y = var2;
 	}
 }
 
 void move_left(float move_speed)
 {
-	if (g_game->map->map[(int)(g_game->player.y - cos(g_game->player.angle) * move_speed)]\
-		[(int)(g_game->player.x)] != '1')
+	if (g_game->map->map[(int)(g_game->player.y / TILE_SIZE)]\
+		[(int)(g_game->player.x / TILE_SIZE )] != '1')
 	{
 		g_game->player.x += sin(g_game->player.angle) * move_speed;
 		g_game->player.y -= cos(g_game->player.angle) * move_speed;
@@ -180,8 +183,8 @@ void move_left(float move_speed)
 
 void move_right(float move_speed)
 {
-	if (g_game->map->map[(int)(g_game->player.y + cos(g_game->player.angle) * move_speed)]\
-		[(int)(g_game->player.x)] != '1')
+	if (g_game->map->map[(int)(g_game->player.y / TILE_SIZE)]\
+		[(int)(g_game->player.x / TILE_SIZE)] != '1')
 	{
 		g_game->player.x -= sin(g_game->player.angle) * move_speed;
 		g_game->player.y += cos(g_game->player.angle) * move_speed;
@@ -194,7 +197,7 @@ void ft_hook(void* param)
 	float move_speed;
 	float rot_speed;
 
-	move_speed = 0.05;
+	move_speed = 0.5;
 	rot_speed = 0.05;
 
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_ESCAPE))
