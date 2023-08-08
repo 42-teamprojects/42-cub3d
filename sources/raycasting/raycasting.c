@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/08 13:31:58 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/08 20:20:29 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void cast_ray()
 	}
 }
 
-// int normalize_angle()
-// {
-// 	g_game->player.angle = g_game->player.angle / (2 * M_PI);
-// 	if (g_game->player.angle < 0)
-// 		g_game->player.angle = (2 * M_PI) + g_game->player.angle;
-// 	return ((float)g_game->player.angle);
-// }
+int normalize_angle()
+{
+	g_game->player.angle = g_game->player.angle / (2 * M_PI);
+	if (g_game->player.angle < 0)
+		g_game->player.angle = (2 * M_PI) + g_game->player.angle;
+	return ((float)g_game->player.angle);
+}
 
 void horizental_ray_intersection(float rayAngle)
 {
@@ -46,6 +46,9 @@ void horizental_ray_intersection(float rayAngle)
 	float rayfacingup = !rayfacingdown;
 	float rayfacingright = rayAngle < (M_PI / 2 ) || rayAngle > (3 * M_PI) / 2;
 	float rayfacingleft = !rayfacingright;
+	int foundhorzwallhit = 0;
+	int wallhitx = 0;
+	int wallhity = 0;
 
 	Ay = (int)(g_game->player.y / TILE_SIZE) * TILE_SIZE;
 	if (rayfacingdown)
@@ -59,4 +62,23 @@ void horizental_ray_intersection(float rayAngle)
 		xstep *= -1;
 	if (rayfacingright && xstep < 0)
 		xstep *= -1;
+	float nexthorzX = Ax;
+	float nexthorzY = Ay;
+	if (rayfacingup)
+		nexthorzY--;
+	while (nexthorzX >= 0 && nexthorzX <= g_game->img_map->width * TILE_SIZE && nexthorzY >= 0 && nexthorzY <= g_game->img_map->height * TILE_SIZE)
+	{
+			if (g_game->map->map[(int)nexthorzX][(int)nexthorzY] != '1')
+			{
+				foundhorzwallhit = 1;
+				wallhitx = nexthorzX;
+				wallhity = nexthorzY;
+				break;
+			}
+			else
+			{
+				nexthorzX += xstep;
+				nexthorzY += ystep;
+			}
+	}
 }
