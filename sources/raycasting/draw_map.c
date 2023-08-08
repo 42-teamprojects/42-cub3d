@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/07 16:23:37 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:33:11 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
     float Y = g_game->player.y;
     for (int i = 0; i <= steps; i++)
     {
-        mlx_put_pixel(*img, X, Y, get_rgba(0, 100, 150, 1));
+        mlx_put_pixel(*img, X, Y, get_rgba(100, 180, 150, 3));
         X += Xinc;
         Y += Yinc;
     }

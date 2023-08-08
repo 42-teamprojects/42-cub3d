@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/07 16:19:59 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/08 12:53:28 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	ft_hook(void* param);
 void	draw_map();
 void	cast_ray();
 int		get_rgba(int r, int g, int b, float a);
+int		normalize_angle();
 #endif
