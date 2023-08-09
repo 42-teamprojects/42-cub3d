@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/09 14:05:50 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:48:22 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void ft_hook(void* param)
 	float move_speed;
 	float rot_speed;
 
-	move_speed = 0.5;
+	move_speed = 0.8;
 	rot_speed = 0.05;
 
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_ESCAPE))
@@ -213,12 +213,12 @@ void ft_hook(void* param)
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_LEFT))
 		{
 			g_game->player.angle -= rot_speed;
-			// g_game->player.angle = normalize_angle(g_game->player.angle);
+			g_game->player.angle = normalize_angle(g_game->player.angle);
 		}
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_RIGHT))
 		{
 			g_game->player.angle += rot_speed;
-			// g_game->player.angle = normalize_angle(g_game->player.angle);
+			g_game->player.angle = normalize_angle(g_game->player.angle);
 		}
 	draw_map();
 }
