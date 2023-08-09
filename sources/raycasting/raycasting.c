@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/09 16:35:54 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:28:06 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ int check_wall(float x, float y)
 {
 	int x1;
 	int y1;
+	int lenx;
 	
-	x1 = x / TILE_SIZE ;
-	y1 = y / TILE_SIZE ;
-	if(x < 0 || x > g_game->img_map->height * TILE_SIZE || y < 0 || y > g_game->img_map->width * TILE_SIZE)
+	x1 = x / TILE_SIZE;
+	y1 = y / TILE_SIZE;
+	lenx = ft_strlen(g_game->map->map[y1]);
+	if(x1 < 0 || x1 > lenx || y1 < 0 || y1 > g_game->map->height)
 		return (1);
 	if (g_game->map->map[y1][x1] == '1')
 		return (1);
