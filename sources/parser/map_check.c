@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/07 11:20:56 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/09 10:08:48 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	save_player_info(int i, int j, char dir)
 {
 	g_game->player.x = j * TILE_SIZE ;
 	g_game->player.y = i * TILE_SIZE ;
-	printf("x = %f, y = %f\n", g_game->player.x, g_game->player.y);
 	g_game->player.dir = dir;
 	if (dir == 'N')
 		g_game->player.angle = 1.5 * M_PI;

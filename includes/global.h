@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/08 13:14:02 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/09 10:19:20 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ typedef struct s_imgs {
 	mlx_image_t	*map;
 	mlx_image_t	*player;
 }				t_imgs;
+
+typedef struct s_cords
+{
+	int x;
+	int y;
+}	t_cords;
 
 typedef struct s_game {
 	mlx_t		*mlx;

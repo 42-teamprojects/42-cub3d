@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/07 16:33:11 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:05:50 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,17 +135,17 @@ void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
     }
 }
 
-void draw_angle_dda(mlx_image_t **img, float ray_angle)
-{
-	float dx;
-	float dy;
-
-	float x = g_game->player.x;
-    float y = g_game->player.y;
-    dx = x + cos(ray_angle)  * TILE_SIZE ;
-    dy = y + sin(ray_angle)  * TILE_SIZE ;
-    DDA(img, x, y, dx , dy);
-}
+// void draw_angle_dda(mlx_image_t **img, t_cords hits, float ray_angle)
+// {
+// 	float dx;
+// 	float dy;
+// 	(void)ray_angle;
+// 	float x = g_game->player.x;
+//     float y = g_game->player.y;
+//     dx = hits.x + cos(ray_angle);
+//     dy = hits.y + sin(ray_angle);
+//     DDA(img, x, y, dx , dy);
+// }
 
 void move_forward(float move_speed)
 {
@@ -211,8 +211,14 @@ void ft_hook(void* param)
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_D))
 		move_right(move_speed);
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_LEFT))
-		g_game->player.angle -= rot_speed;
+		{
+			g_game->player.angle -= rot_speed;
+			// g_game->player.angle = normalize_angle(g_game->player.angle);
+		}
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_RIGHT))
-		g_game->player.angle += rot_speed;
+		{
+			g_game->player.angle += rot_speed;
+			// g_game->player.angle = normalize_angle(g_game->player.angle);
+		}
 	draw_map();
 }
