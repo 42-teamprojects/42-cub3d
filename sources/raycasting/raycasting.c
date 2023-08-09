@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/09 17:28:06 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/09 19:07:34 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ int check_wall(float x, float y)
 	int x1;
 	int y1;
 	int lenx;
+
 	
 	x1 = x / TILE_SIZE;
 	y1 = y / TILE_SIZE;
 	lenx = ft_strlen(g_game->map->map[y1]);
-	if(x1 < 0 || x1 > lenx || y1 < 0 || y1 > g_game->map->height)
+	if(x1 < 0 || x1 >= lenx || y1 < 0 || y1 >= g_game->map->height)
 		return (1);
 	if (g_game->map->map[y1][x1] == '1')
 		return (1);
@@ -84,6 +85,12 @@ t_cords horizental_ray_intersection(float rayAngle)
 		nexthorzY--;
 	while (nexthorzX >= 0 && nexthorzX <= g_game->img_map->width  && nexthorzY >= 0 && nexthorzY <= g_game->img_map->height )
 	{
+		// float x_to_check = nexthorzX;
+		// float y_to_check;
+		// if (rayfacingup)
+		// 	y_to_check = nexthorzY - 1;
+		// else
+		// 	y_to_check = nexthorzY;
 		if (check_wall(nexthorzX, nexthorzY))
 		{
 			foundhorzwallhit = 1;
@@ -119,6 +126,12 @@ t_cords horizental_ray_intersection(float rayAngle)
 		nextvertzX--;
 	while (nextvertzX >= 0 && nextvertzX <= g_game->img_map->width && nextvertzY >= 0 && nextvertzY <= g_game->img_map->height)
 	{
+		// float x_to_check;
+		// if (rayfacingleft)
+		// 	x_to_check = nextvertzX - 1;
+		// else
+		// 	x_to_check = nextvertzX;
+		// float y_to_check = nextvertzY;
 		if (check_wall(nextvertzX, nextvertzY))
 		{
 			foundvertiwallhit = 1;
