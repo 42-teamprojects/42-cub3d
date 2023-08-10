@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/10 09:50:39 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/10 09:57:33 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ t_cords horizental_ray_intersection(float rayAngle)
 		xstep *= -1;
 	float nexthorzX = Ax;
 	float nexthorzY = Ay;
-	// if (rayfacingup)
-	// 	nexthorzY--;
 	while (nexthorzX >= 0 && nexthorzX <= g_game->img_map->width  && nexthorzY >= 0 && nexthorzY <= g_game->img_map->height )
 	{
 		float x_to_check = nexthorzX;
@@ -122,8 +120,6 @@ t_cords horizental_ray_intersection(float rayAngle)
 		ystep *= -1;
 	float nextvertzX = Ax;
 	float nextvertzY = Ay;
-	// if (rayfacingleft)
-	// 	nextvertzX--;
 	while (nextvertzX >= 0 && nextvertzX <= g_game->img_map->width && nextvertzY >= 0 && nextvertzY <= g_game->img_map->height)
 	{
 		float x_to_check;
