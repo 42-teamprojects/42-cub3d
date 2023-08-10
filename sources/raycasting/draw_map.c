@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/09 17:12:55 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/10 09:47:50 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int get_rgba(int r, int g, int b, float a)
     return (color);
 }
 
-void	draw_pixels(mlx_image_t **img, int h, int w, int color)
+void	draw_pixels(mlx_image_t **img, float h, float w, int color)
 {
-	int	i;
-	int	j;
+	float	i;
+	float	j;
 	(void)color;
 
 	i = h;
@@ -41,8 +41,8 @@ void	draw_pixels(mlx_image_t **img, int h, int w, int color)
 
 void	draw_pixels3()
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 	
 	x = 0;
 	while (x < g_game->map->width * TILE_SIZE)
@@ -70,10 +70,10 @@ void	draw_pixels3()
 }
 
 
-void	draw_pixelsv2(mlx_image_t **img, int posx, int posy, int color)
+void	draw_pixelsv2(mlx_image_t **img, float posx, float posy, int color)
 {
-	int	i;
-	int	j;
+	float	i;
+	float	j;
 
 	i = posx - 3;
 	while (i < (posx +  (TILE_SIZE / 4)) - 3 )
@@ -121,8 +121,12 @@ void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
 {
     int dx = X1 - X0;
     int dy = Y1 - Y0;
+	int steps;
 
-    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+	if (abs(dx) > abs(dy))
+		steps = abs(dx);		
+	else
+		steps = abs(dy);
     float Xinc = dx / (float)steps;
     float Yinc = dy / (float)steps;
     float X = g_game->player.x;
@@ -153,8 +157,8 @@ void move_forward(float move_speed)
 	float var2 = g_game->player.y + sin(g_game->player.angle) * move_speed;
 	if (g_game->map->map[(int)(var2 / TILE_SIZE)][(int)((var / TILE_SIZE))] != '1')
 	{
-		g_game->player.x = var;
 		g_game->player.y = var2;
+		g_game->player.x = var;
 	}
 }
 
@@ -198,7 +202,7 @@ void ft_hook(void* param)
 	float rot_speed;
 
 	move_speed = 2;
-	rot_speed = 0.05;
+	rot_speed = 0.09;
 
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(g_game->mlx);
