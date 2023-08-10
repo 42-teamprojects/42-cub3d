@@ -15,6 +15,7 @@ GLFW = $(shell brew --prefix glfw)
 DEPS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)/lib" $(MLX42)
 
 SRCS = main.c \
+	sources/game/hooks.c \
 	sources/parser/parser.c \
 	sources/parser/map_get.c \
 	sources/parser/map_check.c \
