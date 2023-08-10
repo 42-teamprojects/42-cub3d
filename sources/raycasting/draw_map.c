@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/10 13:13:13 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:58:19 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,6 @@ void	draw_map()
 	}
 	draw_pixels3();
 	draw_player(&g_game->img_map, g_game->player.x, g_game->player.y);
-	cast_ray();
-
 }
 
 void DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1)
@@ -247,4 +245,5 @@ void ft_hook(void* param)
 			g_game->player.angle = normalize_angle(g_game->player.angle);
 		}
 	draw_map();
+	cast_ray();
 }

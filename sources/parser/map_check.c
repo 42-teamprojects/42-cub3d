@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/10 12:45:56 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:46:07 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	save_player_info(int i, int j, char dir)
 	g_game->player.x = j * TILE_SIZE + TILE_SIZE / 2;
 	g_game->player.y = i * TILE_SIZE + TILE_SIZE / 2;
 	g_game->player.dir = dir;
+	g_game->player.fov = 60 * (M_PI / 180);
 	if (dir == 'N')
 		g_game->player.angle = 1.5 * M_PI;
 	else if (dir == 'S')

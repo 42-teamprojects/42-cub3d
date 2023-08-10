@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/09 17:33:55 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:46:17 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define ERR_PLAYERS "There must be one player in the map."
 // Game
 # define TILE_SIZE 30
+# define WIDTH 700
+# define HEIGHT 640
 
 # include "../libft/libft.h"
 # include <fcntl.h>
@@ -64,6 +66,7 @@ typedef struct s_player {
 	float	y;
 	char	dir;
 	float	angle;
+	float 	fov;
 }				t_player;
 
 typedef struct s_imgs {
@@ -73,16 +76,29 @@ typedef struct s_imgs {
 
 typedef struct s_cords
 {
-	int x;
-	int y;
+	float x;
+	float y;
 }	t_cords;
+
+typedef struct s_ray
+{
+	float	ray_angle;
+	float	wall_hit_x;
+	float	wall_hit_y;
+	float	distance;
+	float	was_hit;
+	float	is_up;
+	float	is_down;
+	float	is_left;
+	float	is_right;
+	float	wall_height;
+}	t_ray;
 
 typedef struct s_game {
 	mlx_t		*mlx;
 	t_map		*map;
 	t_player	player;
 	t_imgs		*imgs;
-	// float 		rayAngle;
 	mlx_image_t	*img_map;
 	mlx_image_t	*img_player;
 }				t_game;

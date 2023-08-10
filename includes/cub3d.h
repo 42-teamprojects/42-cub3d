@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/09 15:31:38 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:47:56 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	draw_map();
 void	cast_ray();
 int		get_rgba(int r, int g, int b, float a);
 float	normalize_angle(float rayAngle);
-t_cords	horizental_ray_intersection(float rayAngle);
-t_cords vertical_ray_intersection(float rayAngle);
+t_ray	raycast(float ray_angle);
 int 	distance_between_points(float x1, float y1, float x2, float y2);
 
 #endif
