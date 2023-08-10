@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/10 09:57:33 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/10 14:39:43 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
 void cast_ray()
 {
 	float FOV = 60 * (M_PI / 180);
-	int num_rays = g_game->img_map->width * TILE_SIZE;
+	int num_rays = g_game->img_map->width * 2;
 	float rayAngle = g_game->player.angle - (FOV / 2);
 	int i = 0;
 	while (i < num_rays)

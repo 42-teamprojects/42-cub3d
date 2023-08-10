@@ -50,6 +50,6 @@ re: fclean all
 run: all
 	@./cub3D maps/1.cub
 
-test: tedt.c 
-	@$(CC)  tedt.c -o test $(DEPS) && ./test
+test: test.c 
+	@$(CC)  test.c -fsanitize=address -g -o test $(DEPS) && ./test
 	@echo "Compilation done"
