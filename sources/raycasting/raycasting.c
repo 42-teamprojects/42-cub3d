@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/11 19:20:13 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/11 20:03:34 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,33 @@ void cast_ray()
 	float ray_angle = g_game->player.angle - (g_game->player.fov / 2);
 	int i = 0;
 	t_ray ray;
-	rect(0, 0, WIDTH, HEIGHT, 0x000000);
+	// rect(0, 0, WIDTH, HEIGHT, 0x000000);
+	i = 0;
+	int j = 0;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while (j < HEIGHT)
+		{
+			mlx_put_pixel(g_game->img_map, i, j, 0x2455667);
+			j++;
+		}
+		i++;
+	}
+	i = 0;
 	while (i < num_rays)
 	{
 		ray_angle += g_game->player.fov / num_rays;
 		ray = get_ray(ray_angle);
+		int start = (HEIGHT / 2) - (ray.wall_height / 2);
+		int end = (HEIGHT / 2) + (ray.wall_height / 2);
+		if(start < 0)
+			start = 0;
 		// DDA(&g_game->img_map, g_game->player.x, g_game->player.y, ray.wall_hit_x, ray.wall_hit_y);
-		rect(i, (HEIGHT / 2) - (ray.wall_height / 2), 1, ray.wall_height, get_rgba(255, 0, 0, 1));
+		rect(i, start, 1, end, get_rgba(255, 0, 0, 1));
 		i++;
 	}
+	
 }
 
 float normalize_angle(float ray_angle)
@@ -44,9 +62,10 @@ int check_wall(float x, float y)
 	int y1;
 	float lenx;
 
-	
-	x1 = x / TILE_SIZE;
-	y1 = y / TILE_SIZE;
+	x1 = (int)x / TILE_SIZE;
+	y1 = (int)y / TILE_SIZE;
+	if (y1 > g_game->map->height)
+		return (1);
 	lenx = ft_strlen(g_game->map->map[y1]);
 	if(x1 < 0 || x1 >=lenx || y1 < 0 || y1 >= g_game->map->height)
 		return (1);
@@ -189,8 +208,12 @@ t_ray	get_ray(float ray_angle)
 		v_ray.distance = INT_MAX;
 	fov_correction = cos(g_game->player.angle - g_game->player.fov / 2);
 	distance_proj_plane = (WIDTH / 2) / tan(g_game->player.fov / 2);
-	h_ray.wall_height = (TILE_SIZE / h_ray.distance) * distance_proj_plane  * fov_correction;
-	v_ray.wall_height = (TILE_SIZE / v_ray.distance) * distance_proj_plane  * fov_correction;
+	// h_ray.wall_height = (TILE_SIZE / h_ray.distance) * distance_proj_plane  * fov_correction;
+	// v_ray.wall_height = (TILE_SIZE / v_ray.distance) * distance_proj_plane  * fov_correction;
+	h_ray.distance *= cos(ray_angle - g_game->player.angle);
+	v_ray.distance *= cos(ray_angle - g_game->player.angle);
+	h_ray.wall_height = (HEIGHT / (h_ray.distance / TILE_SIZE)) ;
+	v_ray.wall_height = (HEIGHT / (v_ray.distance / TILE_SIZE)) ;
 	if (h_ray.distance < v_ray.distance)
 		return (h_ray);
 	else

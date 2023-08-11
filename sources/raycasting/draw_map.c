@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/11 19:09:52 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:54:15 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ void rect(float x, float y, int width, int height, int color)
 {
 	int i;
 	int j;
-
 	i = x;
 	while (i < x + width)
 	{
-		j = y;
-		while (j < y + height)
+		j = 0;
+		while (height > y && HEIGHT > y)
 		{
-			mlx_put_pixel(g_game->img_map, i, j, color);
-			j++;
+			mlx_put_pixel(g_game->img_map, x, y, color);
+			y++;
 		}
 		i++;
 	}
