@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/10 22:51:16 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:17:23 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,8 @@ t_ray	raycast(float ray_angle)
 {
 	t_ray	h_ray;
 	t_ray	v_ray;
+	float	fov_correction;
+	float	distance_proj_plane;
 
 	h_ray = horizontal_ray_intersection(ray_angle);
 	v_ray = vertical_ray_intersection(ray_angle);
@@ -183,15 +185,12 @@ t_ray	raycast(float ray_angle)
 		v_ray.distance = distance_between_points(g_game->player.x, g_game->player.y, v_ray.wall_hit_x, v_ray.wall_hit_y);
 	else
 		v_ray.distance = INT_MAX;
-	float fov_correction = cos(g_game->player.angle - g_game->player.fov / 2);
+	fov_correction = cos(g_game->player.angle - g_game->player.fov / 2);
+	distance_proj_plane = (WIDTH / 2) / tan(g_game->player.fov / 2);
+	h_ray.wall_height = (TILE_SIZE / h_ray.distance) * distance_proj_plane  * fov_correction;
+	v_ray.wall_height = (TILE_SIZE / v_ray.distance) * distance_proj_plane  * fov_correction;
 	if (h_ray.distance < v_ray.distance)
-	{
-		h_ray.wall_height = (HEIGHT) / ((h_ray.distance * fov_correction) / TILE_SIZE);
 		return (h_ray);
-	}
 	else
-	{
-		v_ray.wall_height = (HEIGHT) / ((v_ray.distance * fov_correction) / TILE_SIZE);
 		return (v_ray);
-	}
 }
