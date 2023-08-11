@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/11 16:17:23 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:20:13 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 void cast_ray()
 {
-	int num_rays = WIDTH * 2;
+	int num_rays = WIDTH;
 	float ray_angle = g_game->player.angle - (g_game->player.fov / 2);
 	int i = 0;
 	t_ray ray;
+	rect(0, 0, WIDTH, HEIGHT, 0x000000);
 	while (i < num_rays)
 	{
 		ray_angle += g_game->player.fov / num_rays;
-		ray = raycast(ray_angle);
-		DDA(&g_game->img_map, g_game->player.x, g_game->player.y, ray.wall_hit_x, ray.wall_hit_y);
+		ray = get_ray(ray_angle);
+		// DDA(&g_game->img_map, g_game->player.x, g_game->player.y, ray.wall_hit_x, ray.wall_hit_y);
+		rect(i, (HEIGHT / 2) - (ray.wall_height / 2), 1, ray.wall_height, get_rgba(255, 0, 0, 1));
 		i++;
 	}
 }
@@ -168,7 +170,7 @@ t_ray	vertical_ray_intersection(float ray_angle)
 	return (ray);
 }
 
-t_ray	raycast(float ray_angle)
+t_ray	get_ray(float ray_angle)
 {
 	t_ray	h_ray;
 	t_ray	v_ray;

@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/10 22:40:37 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:12:49 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void	ft_hook(void *param)
 {
 	(void)param;
 	handle_input();
-	draw_map();
 	cast_ray();
+	// draw_map();
 }

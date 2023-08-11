@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/10 19:47:56 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:54:50 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_game(t_game *game);
 void	free_map(t_map *map);
 void	free_info(t_info *info);
 
-// raycasting
+// get_raying
 
 int		put_pixels(void);
 void	DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1);
@@ -53,7 +53,7 @@ void	draw_map();
 void	cast_ray();
 int		get_rgba(int r, int g, int b, float a);
 float	normalize_angle(float rayAngle);
-t_ray	raycast(float ray_angle);
+t_ray	get_ray(float ray_angle);
 int 	distance_between_points(float x1, float y1, float x2, float y2);
-
+void	rect(float x, float y, int width, int height, int color);
 #endif
