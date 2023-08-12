@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/10 21:52:44 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/12 10:32:59 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ int get_rgba(int r, int g, int b, float a)
     return (color);
 }
 
+void rect(float x, float y, int width, int height, int color)
+{
+	int i;
+	int j;
+	i = x;
+	while (i < x + width)
+	{
+		j = 0;
+		while (height > y && HEIGHT > y)
+		{
+			mlx_put_pixel(g_game->img_map, x, y, color);
+			y++;
+		}
+		i++;
+	}
+}
 void	draw_pixels(mlx_image_t **img, float h, float w, int color)
 {
 	float	i;

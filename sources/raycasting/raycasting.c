@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/10 22:51:16 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/12 11:19:28 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,43 @@
 
 void cast_ray()
 {
-	int num_rays = WIDTH * 2;
+	int num_rays = WIDTH;
 	float ray_angle = g_game->player.angle - (g_game->player.fov / 2);
 	int i = 0;
 	t_ray ray;
+	rect(0, 0, WIDTH, HEIGHT, 0x000000);
+	i = 0;
+	int j = 0;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while (j < HEIGHT / 2)
+		{
+			mlx_put_pixel(g_game->img_map, i, j, get_rgba(g_game->map->info->c[0], g_game->map->info->c[1], g_game->map->info->c[2], 1));
+			j++;
+		}
+		j = HEIGHT / 2;
+		while (j < HEIGHT)
+		{
+			mlx_put_pixel(g_game->img_map, i, j, get_rgba(g_game->map->info->f[0], g_game->map->info->f[1], g_game->map->info->f[2], 1));
+			j++;
+		}
+		i++;
+	}
+	i = 0;
 	while (i < num_rays)
 	{
 		ray_angle += g_game->player.fov / num_rays;
-		ray = raycast(ray_angle);
-		DDA(&g_game->img_map, g_game->player.x, g_game->player.y, ray.wall_hit_x, ray.wall_hit_y);
+		ray = get_ray(ray_angle);
+		int start = (HEIGHT / 2) - (ray.wall_height / 2);
+		int end = (HEIGHT / 2) + (ray.wall_height / 2);
+		if(start < 0)
+			start = 0;
+		// DDA(&g_game->img_map, g_game->player.x, g_game->player.y, ray.wall_hit_x, ray.wall_hit_y);
+		rect(i, start, 1, end, get_rgba(255, 0, 0, 1));
 		i++;
 	}
+	
 }
 
 float normalize_angle(float ray_angle)
@@ -42,9 +68,10 @@ int check_wall(float x, float y)
 	int y1;
 	float lenx;
 
-	
-	x1 = x / TILE_SIZE;
-	y1 = y / TILE_SIZE;
+	x1 = (int)x / TILE_SIZE;
+	y1 = (int)y / TILE_SIZE;
+	if (y1 > g_game->map->height)
+		return (1);
 	lenx = ft_strlen(g_game->map->map[y1]);
 	if(x1 < 0 || x1 >=lenx || y1 < 0 || y1 >= g_game->map->height)
 		return (1);
@@ -53,7 +80,7 @@ int check_wall(float x, float y)
 	return (0);
 }
 
-int distance_between_points(float x1, float y1, float x2, float y2)
+float distance_between_points(float x1, float y1, float x2, float y2)
 {
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
@@ -168,10 +195,11 @@ t_ray	vertical_ray_intersection(float ray_angle)
 	return (ray);
 }
 
-t_ray	raycast(float ray_angle)
+t_ray	get_ray(float ray_angle)
 {
 	t_ray	h_ray;
 	t_ray	v_ray;
+	float	fish_eye_fix;
 
 	h_ray = horizontal_ray_intersection(ray_angle);
 	v_ray = vertical_ray_intersection(ray_angle);
@@ -183,15 +211,11 @@ t_ray	raycast(float ray_angle)
 		v_ray.distance = distance_between_points(g_game->player.x, g_game->player.y, v_ray.wall_hit_x, v_ray.wall_hit_y);
 	else
 		v_ray.distance = INT_MAX;
-	float fov_correction = cos(g_game->player.angle - g_game->player.fov / 2);
+	fish_eye_fix = cos(ray_angle - g_game->player.angle);
+	h_ray.wall_height = (HEIGHT / (h_ray.distance * fish_eye_fix / TILE_SIZE)) ;
+	v_ray.wall_height = (HEIGHT / (v_ray.distance * fish_eye_fix / TILE_SIZE)) ;
 	if (h_ray.distance < v_ray.distance)
-	{
-		h_ray.wall_height = (HEIGHT) / ((h_ray.distance * fov_correction) / TILE_SIZE);
 		return (h_ray);
-	}
 	else
-	{
-		v_ray.wall_height = (HEIGHT) / ((v_ray.distance * fov_correction) / TILE_SIZE);
 		return (v_ray);
-	}
 }
