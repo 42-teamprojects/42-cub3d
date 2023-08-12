@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/11 20:03:34 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/12 11:19:28 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,21 @@ void cast_ray()
 	float ray_angle = g_game->player.angle - (g_game->player.fov / 2);
 	int i = 0;
 	t_ray ray;
-	// rect(0, 0, WIDTH, HEIGHT, 0x000000);
+	rect(0, 0, WIDTH, HEIGHT, 0x000000);
 	i = 0;
 	int j = 0;
 	while (i < WIDTH)
 	{
 		j = 0;
+		while (j < HEIGHT / 2)
+		{
+			mlx_put_pixel(g_game->img_map, i, j, get_rgba(g_game->map->info->c[0], g_game->map->info->c[1], g_game->map->info->c[2], 1));
+			j++;
+		}
+		j = HEIGHT / 2;
 		while (j < HEIGHT)
 		{
-			mlx_put_pixel(g_game->img_map, i, j, 0x2455667);
+			mlx_put_pixel(g_game->img_map, i, j, get_rgba(g_game->map->info->f[0], g_game->map->info->f[1], g_game->map->info->f[2], 1));
 			j++;
 		}
 		i++;
@@ -74,7 +80,7 @@ int check_wall(float x, float y)
 	return (0);
 }
 
-int distance_between_points(float x1, float y1, float x2, float y2)
+float distance_between_points(float x1, float y1, float x2, float y2)
 {
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
@@ -193,8 +199,7 @@ t_ray	get_ray(float ray_angle)
 {
 	t_ray	h_ray;
 	t_ray	v_ray;
-	float	fov_correction;
-	float	distance_proj_plane;
+	float	fish_eye_fix;
 
 	h_ray = horizontal_ray_intersection(ray_angle);
 	v_ray = vertical_ray_intersection(ray_angle);
@@ -206,14 +211,9 @@ t_ray	get_ray(float ray_angle)
 		v_ray.distance = distance_between_points(g_game->player.x, g_game->player.y, v_ray.wall_hit_x, v_ray.wall_hit_y);
 	else
 		v_ray.distance = INT_MAX;
-	fov_correction = cos(g_game->player.angle - g_game->player.fov / 2);
-	distance_proj_plane = (WIDTH / 2) / tan(g_game->player.fov / 2);
-	// h_ray.wall_height = (TILE_SIZE / h_ray.distance) * distance_proj_plane  * fov_correction;
-	// v_ray.wall_height = (TILE_SIZE / v_ray.distance) * distance_proj_plane  * fov_correction;
-	h_ray.distance *= cos(ray_angle - g_game->player.angle);
-	v_ray.distance *= cos(ray_angle - g_game->player.angle);
-	h_ray.wall_height = (HEIGHT / (h_ray.distance / TILE_SIZE)) ;
-	v_ray.wall_height = (HEIGHT / (v_ray.distance / TILE_SIZE)) ;
+	fish_eye_fix = cos(ray_angle - g_game->player.angle);
+	h_ray.wall_height = (HEIGHT / (h_ray.distance * fish_eye_fix / TILE_SIZE)) ;
+	v_ray.wall_height = (HEIGHT / (v_ray.distance * fish_eye_fix / TILE_SIZE)) ;
 	if (h_ray.distance < v_ray.distance)
 		return (h_ray);
 	else

@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:58:06 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/04 15:55:58 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/12 10:57:13 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,21 @@ char	*read_map(int fd)
 {
 	char	*line;
 	char	*map;
+	// char	*tmp;
 
 	line = get_next_line(fd);
 	if (!line)
-	{
-		throw_err("Invalid map file.");
-		return (0);
-	}
+		return (throw_err("Invalid map file."), (void *)0);
 	map = line;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		// tmp = ft_strtrim(line, " \t\n\v\f\r");
+		// if (ft_strlen(tmp) == 0)
+		// 	return (throw_err("Invalid map."), (void *)0);
+		// free(tmp);
 		map = ft_strjoin_gnl(map, line);
 		free(line);
 	}

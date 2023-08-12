@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/11 20:08:02 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/12 11:19:57 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	handle_input(void)
 	float	move_speed;
 	float	rot_speed;
 
-	move_speed = 1.5;
+	move_speed = 0.5;
 	rot_speed = 0.05;
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(g_game->mlx);
@@ -81,5 +81,5 @@ void	ft_hook(void *param)
 	(void)param;
 	handle_input();
 	cast_ray();
-	// draw_map();
+	draw_map();
 }
