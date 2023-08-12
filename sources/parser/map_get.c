@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:58:06 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 10:57:13 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/12 22:13:14 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,33 @@ char	*read_map(int fd)
 {
 	char	*line;
 	char	*map;
-	// char	*tmp;
+	char	*tmp;
+	int		map_start;
+	int		map_end;
 
+	map_start = -1;
+	map_end = -1;
 	line = get_next_line(fd);
 	if (!line)
 		return (throw_err("Invalid map file."), (void *)0);
 	map = line;
+	int i = 1;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		// tmp = ft_strtrim(line, " \t\n\v\f\r");
-		// if (ft_strlen(tmp) == 0)
-		// 	return (throw_err("Invalid map."), (void *)0);
-		// free(tmp);
 		map = ft_strjoin_gnl(map, line);
+		tmp = ft_strtrim(line, "\n");
+		if (is_all_wall(tmp) && map_start != -1)
+			map_end = i;
+		if (is_all_wall(tmp) && map_start == -1)
+			map_start = i;
+		if (map_start != -1 && map_end == -1 && (ft_strlen(ft_strtrim(line, " \n")) == 0 || line[0] == '\n'))
+			return (throw_err("Newline inside the map."), (void *)0);
+		free(tmp);
 		free(line);
+		i++;
 	}
 	close(fd);
 	return (map);

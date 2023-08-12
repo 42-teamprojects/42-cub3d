@@ -6,11 +6,17 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 11:19:28 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:02:19 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int rgba(int r, int g, int b, float a)
+{
+	int alpha = (int)(a * 255);
+	return (alpha << 24 | r << 16 | g << 8 | b);
+}
 
 void cast_ray()
 {
@@ -18,7 +24,6 @@ void cast_ray()
 	float ray_angle = g_game->player.angle - (g_game->player.fov / 2);
 	int i = 0;
 	t_ray ray;
-	rect(0, 0, WIDTH, HEIGHT, 0x000000);
 	i = 0;
 	int j = 0;
 	while (i < WIDTH)
@@ -46,7 +51,7 @@ void cast_ray()
 		int end = (HEIGHT / 2) + (ray.wall_height / 2);
 		if(start < 0)
 			start = 0;
-		// DDA(&g_game->img_map, g_game->player.x, g_game->player.y, ray.wall_hit_x, ray.wall_hit_y);
+		DDA(&g_game->img_map, g_game->player.x, g_game->player.y, ray.wall_hit_x, ray.wall_hit_y);
 		rect(i, start, 1, end, get_rgba(255, 0, 0, 1));
 		i++;
 	}
@@ -215,7 +220,7 @@ t_ray	get_ray(float ray_angle)
 	h_ray.wall_height = (HEIGHT / (h_ray.distance * fish_eye_fix / TILE_SIZE)) ;
 	v_ray.wall_height = (HEIGHT / (v_ray.distance * fish_eye_fix / TILE_SIZE)) ;
 	if (h_ray.distance < v_ray.distance)
-		return (h_ray);
+		return ((v_ray.was_hit_vert = 0), h_ray);
 	else
-		return (v_ray);
+		return ((v_ray.was_hit_vert = 1), v_ray);
 }

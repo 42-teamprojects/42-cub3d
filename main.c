@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 15:29:30 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 11:07:35 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/12 16:15:44 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int	init_game(char *file)
 {
 	g_game = (t_game *) malloc(sizeof(t_game));
 	g_game->map = parser(file);
-	g_game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
+	if (!g_game->map)
+		return (1);
+	g_game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	if (!g_game->mlx)
 		return (1);
 	g_game->img_map = mlx_new_image(g_game->mlx, WIDTH, HEIGHT);
     mlx_image_to_window(g_game->mlx, g_game->img_map, 0, 0);
-	cast_ray();
 	mlx_loop_hook(g_game->mlx, ft_hook, g_game);
 	return (0);
 }
