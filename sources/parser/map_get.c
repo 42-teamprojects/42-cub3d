@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:58:06 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 22:13:14 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:27:17 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*read_map(int fd)
 	char	*tmp;
 	int		map_start;
 	int		map_end;
+	int		i;
 
 	map_start = -1;
 	map_end = -1;
@@ -51,7 +52,7 @@ char	*read_map(int fd)
 	if (!line)
 		return (throw_err("Invalid map file."), (void *)0);
 	map = line;
-	int i = 1;
+	i = 1;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -63,7 +64,8 @@ char	*read_map(int fd)
 			map_end = i;
 		if (is_all_wall(tmp) && map_start == -1)
 			map_start = i;
-		if (map_start != -1 && map_end == -1 && (ft_strlen(ft_strtrim(line, " \n")) == 0 || line[0] == '\n'))
+		if (map_start != -1 && map_end == -1 && \
+		(ft_strlen(ft_strtrim(line, " \n")) == 0 || line[0] == '\n'))
 			return (throw_err("Newline inside the map."), (void *)0);
 		free(tmp);
 		free(line);
@@ -77,7 +79,6 @@ int	valid_map(char **map, int *cols, int *rows)
 {
 	*cols = count_cols(map);
 	*rows = ft_arrlen(map);
-
 	if (!is_valid_elements(map))
 		return (throw_err(ERR_ELEMS), 0);
 	if (!is_one_wnse(map))
