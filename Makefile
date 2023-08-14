@@ -16,6 +16,7 @@ DEPS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)/lib
 
 SRCS = main.c \
 	sources/game/hooks.c \
+	sources/game/init.c \
 	sources/parser/parser.c \
 	sources/parser/map_get.c \
 	sources/parser/map_check.c \

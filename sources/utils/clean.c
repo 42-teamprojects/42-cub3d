@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 12:06:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/03 12:12:03 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:45:22 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,6 @@ void	free_game(t_game *game)
 		// if (game->mlx)
 			// mlx_destroy_display(game->mlx);
 		free_map(game->map);
-		if (game->imgs)
-		{
-			if (game->imgs->map)
-				mlx_delete_image(game->mlx, game->imgs->map);
-			if (game->imgs->player)
-				mlx_delete_image(game->mlx, game->imgs->player);
-			free(game->imgs);
-		}
 		free(game);
 	}
 }

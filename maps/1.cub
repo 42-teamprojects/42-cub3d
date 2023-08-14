@@ -1,5 +1,5 @@
 
-EA ./path_to_the_east_texture
+EA ../ass
 
 NO ./path_to_the_north_texture
 

@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 11:37:26 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:03:29 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ int		is_valid_elements(char **map);
 int		is_one_wnse(char **map);
 int		is_surrounded(char **map);
 
+// Game
+int     init_game(char *file);
+
 // Utils
 void	throw_err(char *err);
 void	free_arr(char **arr);
@@ -55,5 +58,5 @@ int		get_rgba(int r, int g, int b, float a);
 float	normalize_angle(float rayAngle);
 t_ray	get_ray(float ray_angle);
 float 	distance_between_points(float x1, float y1, float x2, float y2);
-void	rect(float x, float y, int width, int height, int color);
+void	rect(t_ray ray,float x, float y, int width, int height, int color);
 #endif

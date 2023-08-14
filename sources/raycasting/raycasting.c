@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 20:02:19 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:27:59 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void cast_ray()
 		ray_angle += g_game->player.fov / num_rays;
 		ray = get_ray(ray_angle);
 		int start = (HEIGHT / 2) - (ray.wall_height / 2);
-		int end = (HEIGHT / 2) + (ray.wall_height / 2);
+		int end = ray.wall_height;
 		if(start < 0)
 			start = 0;
-		DDA(&g_game->img_map, g_game->player.x, g_game->player.y, ray.wall_hit_x, ray.wall_hit_y);
-		rect(i, start, 1, end, get_rgba(255, 0, 0, 1));
+		// DDA(&g_game->img_map, g_game->player.x, g_game->player.y, ray.wall_hit_x, ray.wall_hit_y);
+		rect(ray, i, start, 1, end, get_rgba(255, 0, 0, 1));
 		i++;
 	}
 	
@@ -138,6 +138,7 @@ t_ray	horizontal_ray_intersection(float ray_angle)
 		}
 		else
 		{
+			ray.was_hit = 0;
 			next.x += step.x;
 			next.y += step.y;
 		}
@@ -220,7 +221,7 @@ t_ray	get_ray(float ray_angle)
 	h_ray.wall_height = (HEIGHT / (h_ray.distance * fish_eye_fix / TILE_SIZE)) ;
 	v_ray.wall_height = (HEIGHT / (v_ray.distance * fish_eye_fix / TILE_SIZE)) ;
 	if (h_ray.distance < v_ray.distance)
-		return ((v_ray.was_hit_vert = 0), h_ray);
+		return ((h_ray.was_hit_vert = 0), h_ray);
 	else
 		return ((v_ray.was_hit_vert = 1), v_ray);
 }

@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 20:29:33 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:03:17 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 # define ERR_RGB "Invalid RGB colors."
 # define ERR_PLAYERS "There must be one player in the map."
 // Game
-# define TILE_SIZE 7
-# define WIDTH 900
-# define HEIGHT 640
+# define TILE_SIZE 32
+# define WIDTH 920
+# define HEIGHT 800
 
 # include "../libft/libft.h"
 # include <fcntl.h>
@@ -78,7 +78,7 @@ typedef struct s_cords
 {
 	float x;
 	float y;
-}	t_cords;
+}			t_cords;
 
 typedef struct s_ray
 {
@@ -93,15 +93,21 @@ typedef struct s_ray
 	float	is_right;
 	float	wall_height;
 	int		was_hit_vert;
-}	t_ray;
+}			t_ray;
 
 typedef struct s_game {
 	mlx_t		*mlx;
 	t_map		*map;
 	t_player	player;
-	t_imgs		*imgs;
 	mlx_image_t	*img_map;
-	mlx_image_t	*img_player;
+	mlx_texture_t	*no;
+	mlx_texture_t	*so;
+	mlx_texture_t	*we;
+	mlx_texture_t	*ea;
+	int				*no_pxls;
+	int				*so_pxls;
+	int				*we_pxls;
+	int				*ea_pxls;
 }				t_game;
 
 #endif

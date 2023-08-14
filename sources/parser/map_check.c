@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 19:40:53 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/14 12:17:07 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,10 @@ int	is_one_wnse(char **map)
 	return (wnse_count == 1);
 }
 
-int is_surrounded(char **map)
+int	is_surrounded(char **map)
 {
-	int i, j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[i])

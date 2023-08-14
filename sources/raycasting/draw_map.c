@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/12 20:24:17 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:39:53 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,66 @@ int get_rgba(int r, int g, int b, float a)
     return (color);
 }
 
-void rect(float x, float y, int width, int height, int color)
+void WDDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1, int color)
 {
-	int i;
-	int j;
-	i = x;
-	while (i < x + width)
+	int dx = X1 - X0;
+	int dy = Y1 - Y0;
+	int steps;
+
+	if (abs(dx) > abs(dy))
+		steps = abs(dx);
+	else
+		steps = abs(dy);
+	float Xinc = dx / (float)steps;
+	float Yinc = dy / (float)steps;
+	for (int i = 0; i <= steps; i++)
 	{
-		j = 0;
-		while (height > y && HEIGHT > y)
-		{
-			mlx_put_pixel(g_game->img_map, x, y, color);
-			y++;
-		}
+		if (X0 >= 0 && X0 < WIDTH && Y0 >= 0 && Y0 < HEIGHT)
+			mlx_put_pixel(*img, X0, Y0, color);
+		X0 += Xinc;
+		Y0 += Yinc;
+	}
+}
+
+void rect(t_ray ray, float x, float y, int width, int height, int color)
+{
+	(void) width;
+	(void) color;
+	(void) ray;
+	float y_inc = (float)g_game->ea->height / (float)(height);
+	int *pointer;
+	int column; 
+	if(ray.was_hit_vert)
+	{
+		column= (int)ray.wall_hit_y % TILE_SIZE;
+		
+		if(ray.is_left)
+			pointer = g_game->we_pxls;
+		else if(ray.is_right)
+			pointer = g_game->ea_pxls;
+	}
+	else
+	{
+		column= (int)ray.wall_hit_x % TILE_SIZE;
+		if(ray.is_up)
+			pointer = g_game->no_pxls;
+		else if(ray.is_down)
+			pointer = g_game->so_pxls;
+	}
+	float w_err = height / 2 - HEIGHT / 2;
+	if(w_err < 0)
+		w_err = 0;
+	float start = w_err * y_inc;
+	uint32_t i = 0;
+	while ((int)i < height && HEIGHT > (int)(i))
+	{
+		color = pointer[(int)column + (g_game->ea->width * (int)start)];
+		mlx_put_pixel(g_game->img_map, x, y + i, color);
+		start += y_inc;
 		i++;
 	}
 }
+
 void	draw_pixels(mlx_image_t **img, float h, float w, int color)
 {
 	float	i;
