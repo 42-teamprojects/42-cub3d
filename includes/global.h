@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 20:29:33 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/14 10:57:06 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_player {
 	float	y;
 	char	dir;
 	float	angle;
-	float 	fov;
+	float	fov;
 }				t_player;
 
 typedef struct s_imgs {
@@ -76,8 +76,10 @@ typedef struct s_imgs {
 
 typedef struct s_cords
 {
-	float x;
-	float y;
+	float	x;
+	float	y;
+	int		start;
+	int		end;
 }	t_cords;
 
 typedef struct s_ray

@@ -25,6 +25,9 @@ SRCS = main.c \
 	sources/utils/utils.c \
 	sources/utils/clean.c \
 	sources/raycasting/draw_map.c \
+	sources/raycasting/utils.c \
+	sources/raycasting/horiz_cast.c \
+	sources/raycasting/vertical_cast.c 
 
 OBJS = $(SRCS:.c=.o)
 

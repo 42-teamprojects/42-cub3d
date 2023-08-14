@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 11:37:26 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:40:37 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,22 @@ void	free_info(t_info *info);
 // get_raying
 
 int		put_pixels(void);
-void	DDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1);
-void 	draw_angle_dda(mlx_image_t **img, t_cords hits, float ray_angle);
-void	ft_hook(void* param);
-void	draw_map();
-void	cast_ray();
+void	draw_angle_dda(mlx_image_t **img, t_cords hits, float ray_angle);
+void	ft_hook(void *param);
+void	draw_map(void);
+void	cast_ray(void);
 int		get_rgba(int r, int g, int b, float a);
 float	normalize_angle(float rayAngle);
 t_ray	get_ray(float ray_angle);
-float 	distance_between_points(float x1, float y1, float x2, float y2);
-void	rect(float x, float y, int width, int height, int color);
+float	distance_between_points(float x1, float y1, float x2, float y2);
+void	rect(t_cords param, int width, int height, int color);
+void	dda(float x_x, float y_y, float x1, float y1);
+void	draw_map(void);
+void	draw_pixels(mlx_image_t **img, float h, float w, int color);
+void	draw_player(mlx_image_t **img, float posx, float posy, int color);
+int		check_wall(float x, float y);
+void	draw_sky_and_floor(t_cords rect_cords);
+t_ray	horizontal_ray_intersection(float ray_angle);
+t_ray	vertical_ray_intersection(float ray_angle);
+void	ru_first_check(t_ray *ray, float ray_angle);
 #endif
