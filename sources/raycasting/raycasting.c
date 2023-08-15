@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/14 20:27:59 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:31:14 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int check_wall(float x, float y)
 
 	x1 = (int)x / TILE_SIZE;
 	y1 = (int)y / TILE_SIZE;
-	if (y1 > g_game->map->height)
+	if (y1 >= g_game->map->height)
 		return (1);
 	lenx = ft_strlen(g_game->map->map[y1]);
 	if(x1 < 0 || x1 >=lenx || y1 < 0 || y1 >= g_game->map->height)
@@ -122,7 +122,7 @@ t_ray	horizontal_ray_intersection(float ray_angle)
 	
 	next.x = A.x;
 	next.y = A.y;
-	while (next.x >= 0 && next.x <= g_game->img_map->width  && next.y >= 0 && next.y <= g_game->img_map->height )
+	while (next.x >= 0 && next.x <= g_game->map->width * TILE_SIZE  && next.y >= 0 && next.y <= g_game->map->height * TILE_SIZE)
 	{
 		if (ray.is_up)
 			check.y = next.y - 1;
@@ -178,7 +178,7 @@ t_ray	vertical_ray_intersection(float ray_angle)
 	
 	next.x = A.x;
 	next.y = A.y;
-	while (next.x >= 0 && next.x <= g_game->img_map->width  && next.y >= 0 && next.y <= g_game->img_map->height )
+	while (next.x >= 0 && next.x <= g_game->map->width * TILE_SIZE && next.y >= 0 && next.y <= g_game->map->height * TILE_SIZE)
 	{
 		if (ray.is_left)
 			check.x = next.x - 1;

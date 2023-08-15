@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/14 21:03:17 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:33:18 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define ERR_RGB "Invalid RGB colors."
 # define ERR_PLAYERS "There must be one player in the map."
 // Game
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 # define WIDTH 920
 # define HEIGHT 800
 

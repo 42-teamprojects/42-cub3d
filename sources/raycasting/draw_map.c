@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/14 21:39:53 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:13:17 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,6 @@ int get_rgba(int r, int g, int b, float a)
 
     color = r << 24 | g << 16 | b << 8 | (int)a * 255;
     return (color);
-}
-
-void WDDA(mlx_image_t **img, float X0, float Y0, float X1, float Y1, int color)
-{
-	int dx = X1 - X0;
-	int dy = Y1 - Y0;
-	int steps;
-
-	if (abs(dx) > abs(dy))
-		steps = abs(dx);
-	else
-		steps = abs(dy);
-	float Xinc = dx / (float)steps;
-	float Yinc = dy / (float)steps;
-	for (int i = 0; i <= steps; i++)
-	{
-		if (X0 >= 0 && X0 < WIDTH && Y0 >= 0 && Y0 < HEIGHT)
-			mlx_put_pixel(*img, X0, Y0, color);
-		X0 += Xinc;
-		Y0 += Yinc;
-	}
 }
 
 void rect(t_ray ray, float x, float y, int width, int height, int color)
@@ -98,34 +77,34 @@ void	draw_pixels(mlx_image_t **img, float h, float w, int color)
 	}
 }
 
-void	draw_grid()
-{
-	float	x;
-	float	y;
+// void	draw_grid()
+// {
+// 	float	x;
+// 	float	y;
 	
-	x = 0;
-	while (x < g_game->map->width * TILE_SIZE)
-	{
-		y = 0;
-		while (y < g_game->map->height * TILE_SIZE)
-		{
-			mlx_put_pixel(g_game->img_map, x, y, get_rgba(5, 15, 0, 1));
-			y++;
-		}
-		x += TILE_SIZE;
-	}
-	y = 0;
-	while (y < g_game->map->height * TILE_SIZE)
-	{
-		x = 0;
-		while (x < g_game->map->width * TILE_SIZE)
-		{
-			mlx_put_pixel(g_game->img_map, x, y, get_rgba(5, 15, 0, 1));
-			x++;
-		}
-		y += TILE_SIZE;
-	}
-}
+// 	x = 0;
+// 	while (x < WIDTH)
+// 	{
+// 		y = 0;
+// 		while (y < g_game->map->height * TILE_SIZE)
+// 		{
+// 			mlx_put_pixel(g_game->img_map, x, y, get_rgba(5, 15, 0, 1));
+// 			y++;
+// 		}
+// 		x += TILE_SIZE;
+// 	}
+// 	y = 0;
+// 	while (y < g_game->map->height * TILE_SIZE)
+// 	{
+// 		x = 0;
+// 		while (x < WIDTH)
+// 		{
+// 			mlx_put_pixel(g_game->img_map, x, y, get_rgba(5, 15, 0, 1));
+// 			x++;
+// 		}
+// 		y += TILE_SIZE;
+// 	}
+// }
 
 
 void	draw_player(mlx_image_t **img, float posx, float posy, int color)
@@ -159,7 +138,7 @@ void	draw_map()
 		while (g_game->map->map[i][j])
 		{
 			if (g_game->map->map[i][j] == '1')
-				draw_pixels(&g_game->img_map, j * TILE_SIZE, i * TILE_SIZE, get_rgba(255, 255, 255, 1));
+				draw_pixels(&g_game->img_map, j * TILE_SIZE , i * TILE_SIZE, get_rgba(255, 255, 255, 1));
 			j++;
 		}
 		i++;
