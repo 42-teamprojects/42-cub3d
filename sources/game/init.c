@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:40:58 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/16 08:30:29 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:17:40 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	init_assets(void)
 {
-	g_game->no = mlx_load_png("./assets/north.png");
+	g_game->no = mlx_load_png(g_game->map->info->no);
 	if (!g_game->no)
 		return (1);
-	g_game->we = mlx_load_png("./assets/west.png");
+	g_game->we = mlx_load_png(g_game->map->info->we);
 	if (!g_game->we)
 		return (mlx_delete_texture(g_game->no), 1);
-	g_game->ea = mlx_load_png("./assets/east.png");
+	g_game->ea = mlx_load_png(g_game->map->info->ea);
 	if (!g_game->ea)
 		return (mlx_delete_texture(g_game->no), \
 			mlx_delete_texture(g_game->we), 1);
-	g_game->so = mlx_load_png("./assets/south.png");
+	g_game->so = mlx_load_png(g_game->map->info->so);
 	if (!g_game->so)
 		return (mlx_delete_texture(g_game->no), \
 			mlx_delete_texture(g_game->ea), \

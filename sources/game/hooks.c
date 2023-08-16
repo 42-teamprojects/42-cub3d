@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/15 16:18:05 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:25:00 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	move(float move_speed, double x_axis_angle, double y_axis_angle)
 	map_pos.y = new_pos.y / TILE_SIZE;
 	player_pos.x = g_game->player.x / TILE_SIZE;
 	player_pos.y = g_game->player.y / TILE_SIZE;
-	if (g_game->map->map[(int)map_pos.y][(int)map_pos.x] != '1' \
+	if (g_game->map->map[(int)(map_pos.y - 0.1)][(int)(map_pos.x - 0.1)] != '1' \
 		&& g_game->map->map[(int)map_pos.y][(int)player_pos.x] != '1' \
 		&& g_game->map->map[(int)player_pos.y][(int)map_pos.x] != '1')
 	{

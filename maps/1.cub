@@ -1,11 +1,11 @@
 
-EA ../ass
+EA ./assets/east.PNG
 
-NO ./path_to_the_north_texture
+NO ./assets/north.PNG
 
-WE ./path_to_the_west_texture
+WE ./assets/west.PNG
 
-SO ./path_to_the_south_texture
+SO ./assets/south.PNG
 
 C  135,206,235
 F  0,100,25

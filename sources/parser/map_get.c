@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:58:06 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 22:26:32 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:20:49 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*read_map(int fd)
 	char	*line;
 	char	*map;
 	char	*tmp;
+	char	*tmp2;
 	int		map_start;
 	int		map_end;
 
@@ -63,9 +64,11 @@ char	*read_map(int fd)
 			map_end = i;
 		if (is_all_wall(tmp) && map_start == -1)
 			map_start = i;
-		if (map_start != -1 && map_end == -1 && (ft_strlen(ft_strtrim(line, " \n")) == 0 || line[0] == '\n'))
-			return (throw_err("Newline inside the map."), (void *)0);
+		tmp2 = ft_strtrim(line, " \n");
+		if (map_start != -1 && map_end == -1 && (ft_strlen(tmp2) == 0 || line[0] == '\n'))
+			return (free(tmp), free(tmp2), throw_err("Newline inside the map."), (void *)0);
 		free(tmp);
+		free(tmp2);
 		free(line);
 		i++;
 	}
