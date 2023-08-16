@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 10:18:23 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/15 15:13:17 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/16 08:29:38 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int get_rgba(int r, int g, int b, float a)
     color = r << 24 | g << 16 | b << 8 | (int)a * 255;
     return (color);
 }
-
 void rect(t_ray ray, float x, float y, int width, int height, int color)
 {
 	(void) width;
@@ -33,7 +32,10 @@ void rect(t_ray ray, float x, float y, int width, int height, int color)
 		column= (int)ray.wall_hit_y % TILE_SIZE;
 		
 		if(ray.is_left)
+		{
 			pointer = g_game->we_pxls;
+			column = TILE_SIZE - column - 1;
+		}
 		else if(ray.is_right)
 			pointer = g_game->ea_pxls;
 	}
@@ -43,7 +45,10 @@ void rect(t_ray ray, float x, float y, int width, int height, int color)
 		if(ray.is_up)
 			pointer = g_game->no_pxls;
 		else if(ray.is_down)
+		{
 			pointer = g_game->so_pxls;
+			column = TILE_SIZE - column - 1;
+		}
 	}
 	float w_err = height / 2 - HEIGHT / 2;
 	if(w_err < 0)
@@ -53,7 +58,7 @@ void rect(t_ray ray, float x, float y, int width, int height, int color)
 	while ((int)i < height && HEIGHT > (int)(i))
 	{
 		color = pointer[(int)column + (g_game->ea->width * (int)start)];
-		mlx_put_pixel(g_game->img_map, x, y + i, color);
+			mlx_put_pixel(g_game->img_map, x, y + i, color);
 		start += y_inc;
 		i++;
 	}

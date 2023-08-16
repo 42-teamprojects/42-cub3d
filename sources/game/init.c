@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:40:58 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/15 14:53:38 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/16 08:30:29 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	*parse_pixels(int width, int height, unsigned char *data)
 	int	i;
 	int	j;
 
-	img_colors = (int *)malloc(sizeof(int) * (width * height * 4));
+	img_colors = (int *)malloc(sizeof(int) * (width * height));
 	if (!img_colors)
 		return (NULL);
 	i = 0;

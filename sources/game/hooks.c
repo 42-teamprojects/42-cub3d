@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/15 15:33:37 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:18:05 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	handle_input(void)
 	float	move_speed;
 	float	rot_speed;
 
-	move_speed = 2;
+	move_speed = 4;
 	rot_speed = 0.05;
 	if (mlx_is_key_down(g_game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(g_game->mlx);

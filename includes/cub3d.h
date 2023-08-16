@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/14 16:03:29 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/16 08:17:06 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		is_surrounded(char **map);
 
 // Game
 int     init_game(char *file);
+void     reverse_array(int *arr, int len);
 
 // Utils
 void	throw_err(char *err);
