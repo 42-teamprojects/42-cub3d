@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 12:06:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/16 09:35:00 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:51:05 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	free_arr(char **arr)
 		free(arr[i++]);
 	free(arr);
 }
-
 
 void	free_info(t_info *info)
 {
@@ -54,7 +53,6 @@ void	free_map(t_map *map)
 		free(map);
 	}
 }
-
 
 void	free_game(t_game *game)
 {

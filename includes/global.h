@@ -6,7 +6,7 @@
 /*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/20 11:33:44 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:38:35 by htalhaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,13 @@ typedef struct s_cords
 	int		width;
 	int		height;
 }			t_cords;
+
+typedef struct s_parscords
+{
+	int		map_start;
+	int		map_end;
+	int		i;
+}	t_parscords;
 
 typedef struct s_ray
 {
