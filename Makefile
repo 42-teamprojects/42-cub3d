@@ -26,6 +26,10 @@ SRCS = main.c \
 	sources/utils/utils.c \
 	sources/utils/clean.c \
 	sources/raycasting/draw_map.c \
+	sources/raycasting/utils.c \
+	sources/raycasting/vert_raycast.c \
+	sources/raycasting/horiz_raycast.c \
+
 
 OBJS = $(SRCS:.c=.o)
 
@@ -40,10 +44,12 @@ $(LIBFT):
 
 clean:
 	@rm -f $(OBJS)
+	@make clean -C libft
 	@echo "Cleaning done"
 
 fclean: clean
 	@rm -f $(NAME) $(LIBFT)
+	@make fclean -C libft
 	@echo "Full cleaning done"
 
 re: fclean all
