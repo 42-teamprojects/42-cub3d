@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 10:05:26 by htalhaou          #+#    #+#             */
-/*   Updated: 2023/08/20 13:07:17 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:05:35 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	dda(float x_x, float y_y, float x1, float y1)
-{
-	t_cords	d;
-	int		steps;
-	t_cords	inc;
-	t_cords	p;
-	int		i;
-
-	d.x = x1 - x_x;
-	d.y = y1 - y_y;
-	if ((abs((int)d.x)) > (abs((int)d.y)))
-		steps = (abs((int)d.x));
-	else
-		steps = (abs((int)d.y));
-	inc.x = d.x / (float)steps;
-	inc.y = d.y / (float)steps;
-	p.x = g_game->player.x;
-	p.y = g_game->player.y;
-	i = 0;
-	while (i <= steps)
-	{
-		mlx_put_pixel(g_game->img_map, p.x, p.y, get_rgba(211, 100, 100, 3));
-		p.x += inc.x;
-		p.y += inc.y;
-		i++;
-	}
-}
 
 void	draw_map(void)
 {
