@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/20 12:46:59 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:40:50 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int		count_cols(char **map);
 int		is_valid_elements(char **map);
 int		is_one_wnse(char **map);
 int		is_surrounded(char **map);
+int		check_file(char *file, int *fd);
+int		check_newline(int *map_start, int *map_end, char *line, int i);
+char	*read_map(int fd);
+int		valid_map(char **map, int *cols, int *rows);
+t_map	*check_map(char **map);
 
 // Game
 int		init_game(char *file);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:58:06 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/20 14:50:11 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:36:53 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,31 @@ int	check_file(char *file, int *fd)
 	{
 		*fd = open(file, O_RDONLY);
 		if (*fd == -1)
-		{
-			throw_err(strerror(errno));
-			close(*fd);
-			return (0);
-		}
+			return (throw_err(strerror(errno)), \
+				close(*fd), 0);
 	}
 	else
-	{
-		throw_err(ERR_CUB);
-		return (0);
-	}
+		return (throw_err(ERR_CUB), 0);
+	return (1);
+}
+
+int	check_newline(int *map_start, int *map_end, char *line, int i)
+{
+	char				*tmp;
+	char				*tmp2;
+
+	tmp = ft_strtrim(line, "\n");
+	if (is_all_wall(tmp) && *map_start != -1)
+		*map_end = i;
+	if (is_all_wall(tmp) && *map_start == -1)
+		*map_start = i;
+	tmp2 = ft_strtrim(line, " \n");
+	if (*map_start != -1 && *map_end == -1 && \
+	(ft_strlen(tmp2) == 0 || line[0] == '\n'))
+		return (free(tmp), free(tmp2), \
+		throw_err("Newline inside the map."), 0);
+	free(tmp);
+	free(tmp2);
 	return (1);
 }
 
@@ -41,40 +55,29 @@ char	*read_map(int fd)
 {
 	char		*line;
 	char		*map;
-	char		*tmp;
-	char		*tmp2;
-	t_parscords	pars_cords;
+	int			i;
+	int			map_start;
+	int			map_end;
 
-	pars_cords.map_start = -1;
-	pars_cords.map_end = -1;
+	map_start = -1;
+	map_end = -1;
 	line = get_next_line(fd);
 	if (!line)
 		return (throw_err("Invalid map file."), (void *)0);
 	map = line;
-	pars_cords.i = 1;
+	i = 1;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
 		map = ft_strjoin_gnl(map, line);
-		tmp = ft_strtrim(line, "\n");
-		if (is_all_wall(tmp) && pars_cords.map_start != -1)
-			pars_cords.map_end = pars_cords.i;
-		if (is_all_wall(tmp) && pars_cords.map_start == -1)
-			pars_cords.map_start = pars_cords.i;
-		tmp2 = ft_strtrim(line, " \n");
-		if (pars_cords.map_start != -1 && pars_cords.map_end == -1 && \
-		(ft_strlen(tmp2) == 0 || line[0] == '\n'))
-			return (free(tmp), free(tmp2), \
-			throw_err("Newline inside the map."), (void *)0);
-		free(tmp);
-		free(tmp2);
+		if (!check_newline(&map_start, &map_end, line, i))
+			return (free(line), free(map), (void *)0);
 		free(line);
-		pars_cords.i++;
+		i++;
 	}
-	close(fd);
-	return (map);
+	return (close(fd), map);
 }
 
 int	valid_map(char **map, int *cols, int *rows)
@@ -104,26 +107,4 @@ t_map	*check_map(char **map)
 	if (!valid_map(_map->map, &_map->width, &_map->height))
 		return (free_map(_map), NULL);
 	return (_map);
-}
-
-t_map	*get_map(char *file)
-{
-	int		fd;
-	char	*map_str;
-	char	**map_arr;
-	t_map	*map;
-
-	map_arr = NULL;
-	if (!check_file(file, &fd))
-		return (0);
-	map_str = read_map(fd);
-	if (!map_str)
-		return (0);
-	map_arr = ft_split(map_str, "\n");
-	free(map_str);
-	map = check_map(map_arr);
-	free_arr(map_arr);
-	if (!map)
-		exit(1);
-	return (map);
 }
