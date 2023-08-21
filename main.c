@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 15:29:30 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/16 09:36:31 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:19:52 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ int	main(int ac, char **av)
 		return (throw_err(ERR_ARG), 1);
 	if (init_game(av[1]))
 		return (1);
-	system("leaks cub3D -q");
-	mlx_loop(g_game->mlx);
 	mlx_terminate(g_game->mlx);
-	// free_game(g_game);
+	free_game(g_game);
+	system("leaks cub3D -q");
 	return (0);
 }

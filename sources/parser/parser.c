@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/21 10:37:05 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:07:12 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,5 @@ t_map	*get_map(char *file)
 	free_arr(map_arr);
 	if (!map)
 		exit(1);
-	return (map);
-}
-
-t_map	*parser(char *file)
-{
-	t_map	*map;
-
-	map = (t_map *) malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
-	map = get_map(file);
 	return (map);
 }
