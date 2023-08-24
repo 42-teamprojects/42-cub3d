@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 12:42:49 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/23 10:15:50 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:39:00 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ typedef struct s_cords
 {
 	float	x;
 	float	y;
-	float	y_inc;
-	float	start;
-	float	end;
-	int		width;
-	int		height;
 }			t_cords;
 
 typedef struct s_ray

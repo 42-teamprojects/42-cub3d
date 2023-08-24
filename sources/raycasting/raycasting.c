@@ -3,25 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/20 13:07:03 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:25:57 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	utils_catray(t_cords cords)
+void	draw_fc(void)
 {
+	int i;
 	int	j;
-
-	while (cords.x < WIDTH)
+	
+	i = 0;
+	while (i < WIDTH)
 	{
 		j = 0;
 		while (j < HEIGHT / 2)
 		{
-			mlx_put_pixel(g_game->img_map, cords.x, j, \
+			mlx_put_pixel(g_game->img_map, i, j, \
 			get_rgba(g_game->map->info->c[0], g_game->map->info->c[1], \
 			g_game->map->info->c[2], 1));
 			j++;
@@ -29,12 +31,12 @@ void	utils_catray(t_cords cords)
 		j = HEIGHT / 2;
 		while (j < HEIGHT)
 		{
-			mlx_put_pixel(g_game->img_map, cords.x, j, \
+			mlx_put_pixel(g_game->img_map, i, j, \
 			get_rgba(g_game->map->info->f[0], g_game->map->info->f[1], \
 			g_game->map->info->f[2], 1));
 			j++;
 		}
-		cords.x++;
+		i++;
 	}
 }
 
@@ -44,26 +46,22 @@ void	cast_ray(void)
 	float	ray_angle;
 	t_ray	ray;
 	int		j;
-	t_cords	cords;
+	t_cords	param;
 
 	num_rays = WIDTH;
 	ray_angle = g_game->player.angle - (g_game->player.fov / 2);
 	j = 0;
-	cords.x = 0;
-	utils_catray(cords);
-	cords.x = 0;
-	while (cords.x < num_rays)
+	draw_fc();
+	param.x = 0;
+	while (param.x < num_rays)
 	{
 		ray_angle += g_game->player.fov / num_rays;
 		ray = get_ray(ray_angle);
-		cords.start = (HEIGHT / 2) - (ray.wall_height / 2);
-		cords.end = ray.wall_height;
-		if (cords.start < 0)
-			cords.start = 0;
-		cords.width = 1;
-		cords.y = cords.start;
-		rect(ray, cords, cords.end, get_rgba(255, 0, 0, 1));
-		cords.x++;
+		param.y = (HEIGHT / 2) - (ray.wall_height / 2);
+		if (param.y < 0)
+			param.y = 0;
+		draw_texture(ray, param, ray.wall_height);
+		param.x++;
 	}
 }
 
