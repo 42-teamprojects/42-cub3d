@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/25 20:01:13 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:12:21 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,10 @@ int	is_surrounded(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0')
-			{
-				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' \
-					|| map[i][j - 1] == ' ' || map[i][j + 1] == ' ' \
-					|| !map[i - 1][j] || !map[i + 1][j] \
-					|| !map[i][j - 1]|| !map[i][j + 1])
-					return (0);
-			}
+			if (ft_strchr("NSWE", map[i][j]) && !valid_surroundings(map, i, j))
+				return (0);
+			if (map[i][j] == '0' && !valid_surroundings(map, i, j))
+				return (0);
 			j++;
 		}
 		i++;

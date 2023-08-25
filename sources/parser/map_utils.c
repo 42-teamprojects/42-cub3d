@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:28:07 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/12 21:08:42 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:12:28 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,15 @@ int	found_info(t_info *info)
 		throw_err(ERR_ELEMS);
 		return (0);
 	}
+	return (1);
+}
+
+int valid_surroundings(char **map, int i, int j)
+{
+	if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' \
+		|| map[i][j - 1] == ' ' || map[i][j + 1] == ' ' \
+		|| !map[i - 1][j] || !map[i + 1][j] \
+		|| !map[i][j - 1]|| !map[i][j + 1])
+		return (0);
 	return (1);
 }

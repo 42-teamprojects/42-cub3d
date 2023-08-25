@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/25 17:48:23 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:12:55 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 t_game	*g_game;
 
 // Parser
-t_map	*parser(char *file);
 t_map	*get_map(char *file);
 t_map	*check_map(char **map);
 // // Map
@@ -37,10 +36,10 @@ int		check_newline(int *map_start, int *map_end, char *line, int i);
 char	*read_map(int fd);
 int		valid_map(char **map, int *cols, int *rows);
 t_map	*check_map(char **map);
+int     valid_surroundings(char **map, int i, int j);
 
 // Game
 int		init_game(char *file);
-void	reverse_array(int *arr, int len);
 
 // Utils
 void	throw_err(char *err);
