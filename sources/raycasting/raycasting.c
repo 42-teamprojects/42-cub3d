@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/24 20:25:57 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/25 14:39:27 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,10 @@ void	cast_ray(void)
 	int		num_rays;
 	float	ray_angle;
 	t_ray	ray;
-	int		j;
 	t_cords	param;
 
 	num_rays = WIDTH;
 	ray_angle = g_game->player.angle - (g_game->player.fov / 2);
-	j = 0;
 	draw_fc();
 	param.x = 0;
 	while (param.x < num_rays)
