@@ -6,7 +6,7 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:07:29 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/24 20:25:35 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:48:23 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,15 @@ void	free_info(t_info *info);
 // get_raying
 
 void	ft_hook(void *param);
-void	draw_map(void);
 void	cast_ray(void);
 int		get_rgba(int r, int g, int b, float a);
 float	normalize_angle(float rayAngle);
 t_ray	get_ray(float ray_angle);
 float	distance_between_points(float x1, float y1, float x2, float y2);
-void	draw_texture(t_ray ray, t_cords param, int wall_height);
+void	draw_texture(t_ray ray, t_cords param, float wall_height);
 t_ray	vertical_ray_intersection(float ray_angle);
 t_ray	horizontal_ray_intersection(float ray_angle);
 int		check_wall(float x, float y);
-void	draw_map(void);
 void	draw_pixels(mlx_image_t **img, float h, float w, int color);
-void	draw_player(mlx_image_t **img, float posx, float posy, int color);
 void	ru_first_check(t_ray *ray, float ray_angle);
 #endif

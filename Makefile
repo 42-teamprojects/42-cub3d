@@ -25,7 +25,7 @@ SRCS = main.c \
 	sources/raycasting/raycasting.c \
 	sources/utils/utils.c \
 	sources/utils/clean.c \
-	sources/raycasting/draw_map.c \
+	sources/raycasting/draw_utils.c \
 	sources/raycasting/utils.c \
 	sources/raycasting/vert_raycast.c \
 	sources/raycasting/horiz_raycast.c \

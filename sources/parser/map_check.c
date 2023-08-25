@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htalhaou <htalhaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:58:12 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/20 14:34:33 by htalhaou         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:01:13 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,9 @@ int	is_surrounded(char **map)
 			if (map[i][j] == '0')
 			{
 				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' \
-					|| map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+					|| map[i][j - 1] == ' ' || map[i][j + 1] == ' ' \
+					|| !map[i - 1][j] || !map[i + 1][j] \
+					|| !map[i][j - 1]|| !map[i][j + 1])
 					return (0);
 			}
 			j++;

@@ -1,0 +1,13 @@
+NO ./assets/north.PNG
+SO ./assets/south.PNG
+WE ./assets/west.PNG
+EA ./assets/east.PNG
+C 0,0,0
+
+111111
+100001
+100S01
+100001
+111111
+
+F 255,255,255

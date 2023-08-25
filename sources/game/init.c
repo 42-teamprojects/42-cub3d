@@ -6,12 +6,16 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:40:58 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/21 11:15:45 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/25 19:39:21 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Initializes the game assets by loading the textures and parsing the pixels.
+** Returns 0 if successful, 1 otherwise.
+*/
 int	init_assets(void)
 {
 	g_game->no = mlx_load_png(g_game->map->info->no);
@@ -32,6 +36,15 @@ int	init_assets(void)
 	return (0);
 }
 
+/*
+** Parses the pixels of a texture and returns an array of integers representing the colors.
+** Parameters:
+** - width: the width of the texture
+** - height: the height of the texture
+** - data: the pixel data of the texture
+** Returns:
+** - A pointer to the array of integers representing the colors if successful, NULL otherwise.
+*/
 int	*parse_pixels(int width, int height, unsigned char *data)
 {
 	int	*img_colors;
@@ -52,6 +65,10 @@ int	*parse_pixels(int width, int height, unsigned char *data)
 	return (img_colors);
 }
 
+/*
+** Parses the pixels of all the textures and saves them in the game struct.
+** Returns 0 if successful, 1 otherwise.
+*/
 int	save_pixels(void)
 {
 	g_game->no_pxls = parse_pixels(g_game->no->width, \
@@ -76,6 +93,14 @@ int	save_pixels(void)
 	return (0);
 }
 
+/*
+** Initializes the game by allocating memory for the game struct, loading the map, initializing the mlx window,
+** loading the assets, parsing the pixels and starting the mlx loop.
+** Parameters:
+** - file: the path to the map file
+** Returns:
+** - 0 if successful, 1 otherwise.
+*/
 int	init_game(char *file)
 {
 	g_game = (t_game *) malloc(sizeof(t_game));
