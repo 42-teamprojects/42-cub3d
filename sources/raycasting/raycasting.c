@@ -6,20 +6,12 @@
 /*   By: yelaissa <yelaissa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:44:43 by yelaissa          #+#    #+#             */
-/*   Updated: 2023/08/25 19:10:15 by yelaissa         ###   ########.fr       */
+/*   Updated: 2023/08/26 12:47:16 by yelaissa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
-** This function calculates the distance and height of the wall that the ray
-** intersects with. It does this by calculating the distance to the closest
-** horizontal and vertical walls and then comparing them to determine which
-** one is closer. It also applies a fish-eye fix to the distance calculation.
-** Finally, it returns the ray that was used to calculate the wall distance and
-** height.
-*/
 t_ray	get_ray(float ray_angle)
 {
 	t_ray	h_ray;
@@ -47,16 +39,11 @@ t_ray	get_ray(float ray_angle)
 		return ((v_ray.was_hit_vert = 1), v_ray);
 }
 
-/*
-** This function draws the floor and ceiling of the game window. It does this
-** by iterating over each pixel in the window and setting its color to the
-** appropriate color based on the map file's floor and ceiling colors.
-*/
 void	draw_fc(void)
 {
-	int i;
+	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (i < WIDTH)
 	{
@@ -80,13 +67,6 @@ void	draw_fc(void)
 	}
 }
 
-/*
-** This function casts rays from the player's position to the edges of the
-** screen and draws the resulting walls to the game window. It does this by
-** iterating over each ray and calling the get_ray function to calculate the
-** distance and height of the wall that the ray intersects with. It then calls
-** the draw_texture function to draw the wall to the game window.
-*/
 void	cast_ray(void)
 {
 	int		num_rays;
@@ -109,4 +89,3 @@ void	cast_ray(void)
 		param.x++;
 	}
 }
-
